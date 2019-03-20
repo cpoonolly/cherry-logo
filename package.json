@@ -2,8 +2,8 @@
   "name": "cherry-logo",
   "version": "1.0.0",
   "description": "a logo webcomponent for cherrys homepage",
-  "main": "cherry-logo.js",
-  "module": "cherry-logo.js",
+  "main": "index.js",
+  "module": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

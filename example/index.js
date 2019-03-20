@@ -1,1 +1,1 @@
-import '../cherry-logo';
+import '../index';
