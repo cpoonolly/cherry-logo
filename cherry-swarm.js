@@ -34,6 +34,7 @@ class Swarm {
         this.yMax = canvasHeight;
     }
 
+    /*
     moveToPointAnimation(dt, targetX, targetY) {
         this.particles.forEach((particle) => {
             particle.x += dt * particle.dx / 1000;
@@ -49,12 +50,10 @@ class Swarm {
             particle.dx += vx / vLength;
             particle.dy += vy / vLength;
 
-            // particle.dx += (-.01 * particle.dx);
-            // particle.dy += (-.01 * particle.dy);
-
             // console.log(`x=${particle.x}\ty=${particle.y}\tdx=${particle.dx}\tdy=${particle.dy}`);
         });
     }
+    */
 
     orbitCircleAnimation(dt, circleCenterX, circleCenterY, radius) {
         this.particles.forEach((particle) => {
@@ -110,6 +109,7 @@ class CherrySwarmCanvas extends LitElement {
         return {
             particleCount: {type: Number},
             swarmCount: {type: Number},
+            animationProps: {type: Object}
         };
     }
 
@@ -118,15 +118,14 @@ class CherrySwarmCanvas extends LitElement {
 
         this.particleCount = 1000;
         this.swarmCount = 1;
+        this.animationProps = {animationName: 'orbit', }
         
         this.swarms = [];
         this.lastAnimationFrameTime = null;
         this.numAnimationUpdates = 0;
 
-        this.width = 0; // this.shadowRoot.host.clientWidth;
-        this.height = 0; // this.shadowRoot.host.clientHeight;
-
-        window.addEventListener('resize', () => this.onResize());
+        this.width = 0;
+        this.height = 0;
         this.onResize();
     }
 
@@ -158,6 +157,8 @@ class CherrySwarmCanvas extends LitElement {
         
         requestAnimationFrame((timestamp) => this.updateCherry(timestamp));
         this.updateSwarmAnimations(Math.floor(this.width / 2), Math.floor(this.height / 2));
+
+        window.addEventListener('resize', () => this.onResize());
     }
 
     updateSwarmAnimations(circleX, circleY) {
