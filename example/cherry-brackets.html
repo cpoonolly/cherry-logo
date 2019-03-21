@@ -16,14 +16,36 @@
             align-items: center;
             justify-content: center;
         }
+
+        .cherry-brackets-content-buttons {
+            width: 100%;
+            height: 50px;
+            flex-direction: row;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
+
+    <script>
+        function onButtonClick(slotNum) {
+            document.getElementById('cherry-example-brackets').setAttribute('currentSlot', slotNum);
+        }
+    </script>
 
     <title>Test Page for Cherry's Webcomponents: Cherry Brackets</title>
 </head>
 <body>
+    <div class="cherry-brackets-content-buttons">
+        <button onclick="onButtonClick(1)">1</button>
+        <button onclick="onButtonClick(2)">2</button>
+        <button onclick="onButtonClick(3)">3</button>
+    </div>
     <div class="cherry-brackets-container">
-        <cherry-brackets>
-            <h1>Hello World</h1>
+        <cherry-brackets id="cherry-example-brackets">
+            <h1 slot="slot1">Hello World</h1>
+            <h1 slot="slot2">Goodbye World</h1>
+            <h1 slot="slot3">Very Long Message that is Very very very long!</h1>
         </cherry-brackets>
     </div>
 </body>
