@@ -1,5 +1,5 @@
 {
-  "name": "cherry-logo",
+  "name": "cherry-webcomponents",
   "version": "1.0.0",
   "description": "a logo webcomponent for cherrys homepage",
   "main": "index.js",
