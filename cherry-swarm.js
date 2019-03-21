@@ -29,6 +29,11 @@ class Swarm {
         }
     }
 
+    onCanvasResize(canvasWidth, canvasHeight) {
+        this.xMax = canvasWidth;
+        this.yMax = canvasHeight;
+    }
+
     moveToPointAnimation(dt, targetX, targetY) {
         this.particles.forEach((particle) => {
             particle.x += dt * particle.dx / 1000;
@@ -47,8 +52,7 @@ class Swarm {
             // particle.dx += (-.01 * particle.dx);
             // particle.dy += (-.01 * particle.dy);
 
-            // console.log(`x=${particle.x}\ty=${particle.y}`);
-            // console.log(`dx=${particle.dx}\tdy=${particle.dy}`);
+            // console.log(`x=${particle.x}\ty=${particle.y}\tdx=${particle.dx}\tdy=${particle.dy}`);
         });
     }
 
@@ -76,8 +80,7 @@ class Swarm {
             particle.dx += vxPerpNorm;
             particle.dy += vyPerpNorm;
 
-            // console.log(`x=${particle.x}\ty=${particle.y}`);
-            // console.log(`dx=${particle.dx}\tdy=${particle.dy}`);
+            // console.log(`x=${particle.x}\ty=${particle.y}\tdx=${particle.dx}\tdy=${particle.dy}`);
         });
     }
 
@@ -105,8 +108,6 @@ class CherrySwarmCanvas extends LitElement {
 
     static get properties() {
         return {
-            width: {type: Number},
-            height: {type: Number},
             particleCount: {type: Number},
             swarmCount: {type: Number},
         };
@@ -115,14 +116,37 @@ class CherrySwarmCanvas extends LitElement {
     constructor() {
         super();
 
-        this.width = window.screen.width - 200;
-        this.height = window.screen.height - 200;
         this.particleCount = 1000;
         this.swarmCount = 1;
         
         this.swarms = [];
         this.lastAnimationFrameTime = null;
         this.numAnimationUpdates = 0;
+
+        this.width = 0; // this.shadowRoot.host.clientWidth;
+        this.height = 0; // this.shadowRoot.host.clientHeight;
+
+        window.addEventListener('resize', () => this.onResize());
+        this.onResize();
+    }
+
+    onResize() {
+        this.width = Math.max(1, this.shadowRoot.host.clientWidth);
+        this.height = Math.max(1, this.shadowRoot.host.clientHeight);
+        console.log(`Resize(width: ${this.width}, height:${this.height})`);
+        
+        this.swarms.forEach((swarm) => {
+            swarm.onCanvasResize(this.width, this.height);
+        });
+
+        // https://stackoverflow.com/a/3078427
+        const canvas = this.shadowRoot.getElementById(CHERRY_SWARM_CANVAS_ID);
+        if (canvas) {
+            canvas.width = this.width;
+            canvas.height = this.height;
+        }
+
+        this.updateSwarmAnimations(Math.floor(this.width / 2), Math.floor(this.height / 2));
     }
 
     connectedCallback() {
@@ -133,18 +157,11 @@ class CherrySwarmCanvas extends LitElement {
         }
         
         requestAnimationFrame((timestamp) => this.updateCherry(timestamp));
-        setInterval(() => this.updateSwarmAnimations(), 20000);
-
-        this.updateSwarmAnimations();
+        this.updateSwarmAnimations(Math.floor(this.width / 2), Math.floor(this.height / 2));
     }
 
-    updateSwarmAnimations() {
-        this.numAnimationUpdates++;
-
+    updateSwarmAnimations(circleX, circleY) {
         this.swarms.forEach((swarm) => {
-            let circleX = (this.numAnimationUpdates % 2 !== 0) ? Math.floor(this.width / 2) : getRandomInt(0, this.width);
-            let circleY = (this.numAnimationUpdates % 2 !== 0) ? Math.floor(this.height / 2) : getRandomInt(0, this.height);
-
             swarm.animation = ((dt) => swarm.orbitCircleAnimation(dt, circleX, circleY, 50));
         });
     }
@@ -156,11 +173,7 @@ class CherrySwarmCanvas extends LitElement {
         if (!canvas) return;
 
         const dt = currentTime - this.lastAnimationFrameTime;
-
         const canvasContext = canvas.getContext('2d');
-
-        // this.shade = ((this.shade + (dt / 100)) % 30);
-        // canvasContext.fillStyle = `hsl(0,100%,${this.shade + 20}%)`;
 
         canvasContext.fillStyle = 'white';
         canvasContext.fillRect(0, 0, this.width, this.height);
