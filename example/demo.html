@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <style>
+        .cherry-buttons-container {
+            position: absolute;
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cherry-brackets-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cherry-swarm-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh);
+        }
+
+        .cherry-swarm-container cherry-swarm {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <title>Demo Page for Cherry's Logo Webcomponent</title>
+</head>
+<body>
+    <div class="cherry-buttons-container">
+        <cherry-button><h1>About Me</h1></cherry-button>
+    </div>
+    <div class="cherry-brackets-container">
+        <cherry-brackets id="cherry-example-brackets">
+            <div slot="slot1" class="cherry-logo-container">
+                <cherry-logo></cherry-logo>
+            </div>
+            <h1 slot="slot2">Goodbye World</h1>
+            <h1 slot="slot3">Very Long Message that is Very very very long!</h1>
+        </cherry-brackets>
+    </div>
+    <div class="cherry-swarm-container">
+        <cherry-swarm particleCount="1000" swarmCount="5"></cherry-swarm>
+    </div>
+</body>
+</html>
