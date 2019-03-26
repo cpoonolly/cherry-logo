@@ -118,7 +118,7 @@ class CherrySwarmCanvas extends LitElement {
 
         this.particleCount = 1000;
         this.swarmCount = 1;
-        this.animationProps = {animationName: 'orbit', }
+        this.animationProps = {animationName: 'orbit', x: 0, y: 0};
         
         this.swarms = [];
         this.lastAnimationFrameTime = null;
@@ -130,6 +130,9 @@ class CherrySwarmCanvas extends LitElement {
     }
 
     onResize() {
+        let oldWidth = this.width;
+        let oldHeight = this.height;
+
         this.width = Math.max(1, this.shadowRoot.host.clientWidth);
         this.height = Math.max(1, this.shadowRoot.host.clientHeight);
         console.log(`Resize(width: ${this.width}, height:${this.height})`);
@@ -145,7 +148,12 @@ class CherrySwarmCanvas extends LitElement {
             canvas.height = this.height;
         }
 
-        this.updateSwarmAnimations(Math.floor(this.width / 2), Math.floor(this.height / 2));
+        let oldAnimationX = this.animationProps.x;
+        let oldAnimationY = this.animationProps.y;
+
+        this.animationProps.x = Math.floor(this.width * (oldAnimationX / oldWidth));
+        this.animationProps.y = Math.floor(this.height * (oldAnimationY / oldHeight));
+        this.updateSwarmAnimations();
     }
 
     connectedCallback() {
@@ -155,16 +163,24 @@ class CherrySwarmCanvas extends LitElement {
             this.swarms.push(new Swarm(this.width, this.height, this.particleCount, `hsl(0, 100%, ${getRandomInt(60, 90)}%)`));
         }
         
+        this.animationProps.animationName = 'orbit'
+        this.animationProps.x = Math.floor(this.width / 2);
+        this.animationProps.y = Math.floor(this.height / 2);
+
         requestAnimationFrame((timestamp) => this.updateCherry(timestamp));
-        this.updateSwarmAnimations(Math.floor(this.width / 2), Math.floor(this.height / 2));
+        this.updateSwarmAnimations();
 
         window.addEventListener('resize', () => this.onResize());
     }
 
-    updateSwarmAnimations(circleX, circleY) {
-        this.swarms.forEach((swarm) => {
-            swarm.animation = ((dt) => swarm.orbitCircleAnimation(dt, circleX, circleY, 50));
-        });
+    updateSwarmAnimations() {
+        const { x, y, animationName } = this.animationProps;
+
+        if (animationName === 'orbit') {
+            this.swarms.forEach((swarm) => {
+                swarm.animation = ((dt) => swarm.orbitCircleAnimation(dt, x, y, 50));
+            });
+        }
     }
     
     updateCherry(currentTime) {
