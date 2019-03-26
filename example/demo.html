@@ -61,13 +61,13 @@
 <body>
     <div class="cherry-homepage-container">
         <div class="cherry-buttons">
-            <mwc-button id="cherry-btn-about-me" raised onmousedown="swarmOrbitElment('cherry-btn-about-me')">
+            <mwc-button id="cherry-btn-about-me" raised onmousedown="swarmGoCrazy()">
                 About Me
             </mwc-button>
-            <mwc-button id="cherry-btn-experience" raised onmousedown="swarmOrbitElment('cherry-btn-experience')">
+            <mwc-button id="cherry-btn-experience" raised onmousedown="swarmGoCrazy()">
                 Experience
             </mwc-button>
-            <mwc-button id="cherry-btn-projects" raised onmousedown="swarmOrbitElment('cherry-btn-projects')">
+            <mwc-button id="cherry-btn-projects" raised onmousedown="swarmGoCrazy()">
                 Projects
             </mwc-button>
         </div>
@@ -83,43 +83,110 @@
         </div>
     
         <div class="cherry-swarm-container">
-            <cherry-swarm id="cherry-bg-swarm" particleCount="1000" swarmCount="5"></cherry-swarm>
+            <cherry-swarm id="cherry-bg-swarm" particleCount="500" swarmCount="5"></cherry-swarm>
         </div>
     </div>
     <script>
         const cherrySwarmEl = document.getElementById('cherry-bg-swarm');
 
+        function swarmGoCrazy() {
+            console.log('swarmOrbitElement');
+
+            let swarmElRect = document.getElementById('cherry-bg-swarm').getBoundingClientRect();
+            let swarmElX = ((swarmElRect.right - swarmElRect.left) / 2) + swarmElRect.left;
+            let swarmElY = ((swarmElRect.bottom - swarmElRect.top) / 2) + swarmElRect.top;
+
+            let animationProps = [];
+            let durations = [];
+
+            // first freeze .1s
+            durations.push(100);
+            animationProps.push({name: 'freeze'});
+
+            // then go grazy for 1s
+            durations.push(1000);
+            animationProps.push({
+                name: 'random',
+                xMax: swarmElRect.right,
+                yMax: swarmElRect.bottom
+            });
+
+            // then freeze for another .1s
+            durations.push(100);
+            animationProps.push({name: 'freeze'});
+
+            // then orbit back around the center
+            durations.push(null);
+            animationProps.push({
+                name: 'orbit',
+                orbitX: swarmElX,
+                orbitY: swarmElY,
+                radius: 50,
+                xMax: swarmElRect.right,
+                yMax: swarmElRect.bottom
+            });
+
+            cherrySwarmEl.animationProps = {
+                name: 'sequence',
+                animationProps: animationProps,
+                durations: durations
+            };
+        }
+
         function swarmOrbitElment(elementId) {
             console.log('swarmOrbitElement');
 
             let elRect = document.getElementById(elementId).getBoundingClientRect();
+            let elPosX = ((elRect.right - elRect.left) / 2) + elRect.left;
+            let elPosY = ((elRect.bottom - elRect.top) / 2) + elRect.top;
+            
             let swarmElRect = document.getElementById('cherry-bg-swarm').getBoundingClientRect();
+            let swarmElX = ((swarmElRect.right - swarmElRect.left) / 2) + swarmElRect.left;
+            let swarmElY = ((swarmElRect.bottom - swarmElRect.top) / 2) + swarmElRect.top;
 
-            let x = ((elRect.right - elRect.left) / 2) + elRect.left;
-            let y = ((elRect.bottom - elRect.top) / 2) + elRect.top;
-            cherrySwarmEl.animationProps = {
+            let animationProps = [];
+            let durations = [];
+
+            // first orbit around element for 1s
+            durations.push(1000);
+            animationProps.push({
                 name: 'orbit',
-                orbitX: x,
-                orbitY: y,
+                orbitX: elPosX,
+                orbitY: elPosY,
                 radius: 50,
                 xMax: swarmElRect.right,
                 yMax: swarmElRect.bottom
-            };
+            });
 
-            setTimeout(() => swarmOrbitCenter(), 1000);
+            // then orbit back around the center
+            durations.push(null);
+            animationProps.push({
+                name: 'orbit',
+                orbitX: swarmElX,
+                orbitY: swarmElY,
+                radius: 50,
+                xMax: swarmElRect.right,
+                yMax: swarmElRect.bottom
+            });
+
+            cherrySwarmEl.animationProps = {
+                name: 'sequence',
+                animationProps: animationProps,
+                durations: durations
+            };
         }
 
         function swarmOrbitCenter() {
             console.log('swarmOrbitCenter');
 
             let swarmElRect = document.getElementById('cherry-bg-swarm').getBoundingClientRect();
+            let swarmElX = ((swarmElRect.right - swarmElRect.left) / 2) + swarmElRect.left;
+            let swarmElY = ((swarmElRect.bottom - swarmElRect.top) / 2) + swarmElRect.top;
 
-            let x = ((swarmElRect.right - swarmElRect.left) / 2) + swarmElRect.left;
-            let y = ((swarmElRect.bottom - swarmElRect.top) / 2) + swarmElRect.top;
             cherrySwarmEl.animationProps = {
                 name: 'orbit',
-                orbitX: x,
-                orbitY: y,
+                orbitX: swarmElX,
+                orbitY: swarmElY,
                 radius: 50,
                 xMax: swarmElRect.right,
                 yMax: swarmElRect.bottom

@@ -40,7 +40,7 @@ class Swarm {
 const CHERRY_SWARM_CANVAS_ID = 'cherry-swarm-canvas-id';
 
 class SwarmAnimation {
-    animate(swarm, dt) {
+    animate(swarm, dt, currentTime) {
         throw new Error('this should be overridden...');
     }
 
@@ -50,8 +50,18 @@ class SwarmAnimation {
 }
 
 class OrbitPointSwarmAnimation extends SwarmAnimation {
+    static validateParams(orbitX, orbitY, radius, xMax, yMax) {
+        if (orbitX === undefined || orbitX === null) throw Error('invalid orbit animation - orbitX is null/undefined');
+        if (orbitY === undefined || orbitY === null) throw Error('invalid orbit animation - orbitY is null/undefined');
+        if (radius === undefined || radius === null) throw Error('invalid orbit animation - radius is null/undefined');
+        if (xMax === undefined || xMax === null) throw Error('invalid orbit animation - xMax is null/undefined');
+        if (yMax === undefined || yMax === null) throw Error('invalid orbit animation - yMax is null/undefined');
+    }
+
     constructor({orbitX, orbitY, radius, xMax, yMax}) {
         super();
+        
+        OrbitPointSwarmAnimation.validateParams(orbitX, orbitY, radius, xMax, yMax);
 
         this.orbitX = orbitX;
         this.orbitY = orbitY;
@@ -99,11 +109,127 @@ class OrbitPointSwarmAnimation extends SwarmAnimation {
     }
 }
 
+class RandomMotionSwarmAnimation extends SwarmAnimation {
+    static validateParams(xMax, yMax) {
+        if (xMax === undefined || xMax === null) throw Error('invalid orbit animation - xMax is null/undefined');
+        if (yMax === undefined || yMax === null) throw Error('invalid orbit animation - yMax is null/undefined');
+    }
+
+    constructor({xMax, yMax}) {
+        super();
+
+        RandomMotionSwarmAnimation.validateParams(xMax, yMax);
+
+        this.xMax = xMax;
+        this.yMax = yMax;
+    }
+
+    animate(swarm, dt) {
+        let { xMax, yMax } = this;
+
+        swarm.particles.forEach((particle) => {
+            particle.x += dt * particle.dx / 1000;
+            particle.y += dt * particle.dy / 1000;
+
+            particle.x = Math.min(Math.max(-10, particle.x), xMax + 10);
+            particle.y = Math.min(Math.max(-10, particle.y), yMax + 10);
+
+            let vx = getRandomInt(0, xMax) - particle.x;
+            let vy = getRandomInt(0, yMax) - particle.y;
+            let vLength = Math.sqrt((vx*vx) + (vy*vy));
+
+            let vxNorm = vx / vLength;
+            let vyNorm = vy / vLength;
+
+            particle.dx += 100 * vxNorm;
+            particle.dy += 100 * vyNorm;
+
+            // console.log(`x=${particle.x}\ty=${particle.y}\tdx=${particle.dx}\tdy=${particle.dy}`);
+        });
+    }
+
+    onCanvasResize(oldWidth, oldHeight, newWidth, newHeight) {
+        this.xMax = newWidth;
+        this.yMax = newHeight;
+        console.log(`random animation - handling canvas resize: {orbitX: ${this.orbitX}, orbitY: ${this.orbitY}}`);
+    }
+}
+
+class FreezeSwarmAnimation extends SwarmAnimation {
+    constructor() {
+        super();
+    }
+
+    animate(swarm) {
+        swarm.particles.forEach((particle) => {
+            particle.dx = 0;
+            particle.dy = 0;
+        });
+    }
+
+    onCanvasResize() {
+        // noop
+    }
+}
+
+class SwarmAnimationSequence extends SwarmAnimation {
+    constructor({animationProps, durations}) {
+        super();
+
+        if (animationProps.length !== durations.length) {
+            throw Error('invalid animation sequence - durations and animationProps have different lengths');
+        }
+
+        this.animations = [];
+        
+        let atTime = 0;
+        for (let i = 0; i < animationProps.length; i++) {
+            let animation = generateSwarmAnimation(animationProps[i]);
+            let duration = durations[i];
+
+            this.animations.push({animation, atTime});
+            atTime += duration; // doesn't really matter for the last one
+        }
+        
+        this.timeStarted = null;
+        this.timeElapsed = 0;
+        this.indexOfCurrentAnimation = 0;
+        this.currenAnimation = this.animations[this.indexOfCurrentAnimation].animation;
+    }
+
+    updateCurrentTime(currentTime) {
+        if (this.timeStarted === null) this.timeStarted = currentTime;
+        this.timeElapsed = currentTime - this.timeStarted;
+
+        for (let i = this.indexOfCurrentAnimation + 1; i < this.animations.length; i++) {
+            if (this.timeElapsed < this.animations[i].atTime) break;
+
+            this.indexOfCurrentAnimation = i;
+            this.currenAnimation = this.animations[this.indexOfCurrentAnimation].animation;
+        }
+    }
+
+    animate(swarm, dt, currentTime) {
+        this.updateCurrentTime(currentTime);
+        this.currenAnimation.animate(swarm, dt, currentTime);
+    }
+
+    onCanvasResize(oldWidth, oldHeight, newWidth, newHeight) {
+        this.currenAnimation.onCanvasResize(oldWidth, oldHeight, newWidth, newHeight);
+    }
+}
+
 function generateSwarmAnimation(animationProps) {
     console.log(`generating animation: ${JSON.stringify(animationProps)}`);
     switch (animationProps.name) {
         case 'orbit':
             return new OrbitPointSwarmAnimation(animationProps);
+        case 'random':
+            return new RandomMotionSwarmAnimation(animationProps);
+        case 'freeze':
+            return new FreezeSwarmAnimation(animationProps);
+        case 'sequence':
+            return new SwarmAnimationSequence(animationProps);
         default:
             return new OrbitPointSwarmAnimation(animationProps);
     }
@@ -192,7 +318,7 @@ class CherrySwarmCanvas extends LitElement {
         canvasContext.fillRect(0, 0, this.width, this.height);
         
         this.swarms.forEach((swarm) => {
-            this.animation.animate(swarm, dt);
+            this.animation.animate(swarm, dt, currentTime);
             swarm.renderSwarm(canvasContext);
         });
 
