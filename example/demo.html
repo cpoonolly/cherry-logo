@@ -54,7 +54,23 @@
             width: 100%;
             height: 100%;
         }
+
+        .cherry-slot {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+            max-width: 500px;
+            color: hsl(0, 100%, 20%);
+        }
     </style>
+
+    <!-- Materialize Compiled and minified CSS/JavaScript -->
+    <!-- TODO - Move this to webpack -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
 
     <title>Test Page for Cherry's Logo Webcomponent</title>
 </head>
@@ -74,12 +90,58 @@
     
         <div class="cherry-brackets-container">
             <cherry-brackets id="cherry-example-brackets" currentSlot="0">
-                <div slot="slot0" class="cherry-logo-container">
+                <div slot="slot0" class="cherry-slot-logo">
                     <cherry-logo></cherry-logo>
                 </div>
-                <div slot="slot1"><h1>About Me!</h1></div>
-                <div slot="slot2"><h1>Experience!</h1></div>
-                <div slot="slot3"><h1>Projects!</h1></div>
+                <div slot="slot1" class="cherry-slot">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title"><h3>About Me!</h3></span>
+                            <p>
+                                Too lazy to fill this out now but there will definitely be stuff here!
+                                There might even be multiple lines of text here.
+                                That's how much stuff there is going to be!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div slot="slot2" class="cherry-slot">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title"><h3>Experience!</h3></span>
+                            <p>
+                                So much experience folks. Tremendous amounts of experience. Greatest experience in the world.
+                                My people tell me. You know what they tell me? I've got great experience.
+                                It's amazing ladies and gentlement. My experience is spectacular.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div slot="slot3" class="cherry-slot">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title"><h3>Projects!</h3></span>
+                            <p>Pigeon RTC:</p>
+                            <a href="https://cpoonolly.github.io/pigeon-rtc/">Website</a><br/>
+                            <a href="https://github.com/cpoonolly/pigeon-rtc">Github</a><br/>
+                            <br/>
+                            <p>Poker Chip Counter:</p>
+                            <a href="https://expo.io/@cpoonolly/PokerChipCounter">Expo</a><br/>
+                            <a href="https://github.com/cpoonolly/pokerchipcounter">Github</a><br/>
+                        </div>
+                        <div class="card-tabs">
+                            
+                        </div>
+                        <div class="card-content grey lighten-4">
+                            <div id="project1">
+                                
+                            </div>
+                            <div id="project2">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </cherry-brackets>
         </div>
     
