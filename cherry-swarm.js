@@ -22,7 +22,6 @@ class Swarm {
         this.yMax = yMax;
         this.particles = new Array(particleCount);
         this.color = color;
-        this.animation = null;
 
         for (let i = 0; i < particleCount; i++) {
             this.particles[i] = new SwarmParticle(getRandomInt(0, xMax), getRandomInt(0, yMax));
@@ -32,59 +31,6 @@ class Swarm {
     onCanvasResize(canvasWidth, canvasHeight) {
         this.xMax = canvasWidth;
         this.yMax = canvasHeight;
-    }
-
-    /*
-    moveToPointAnimation(dt, targetX, targetY) {
-        this.particles.forEach((particle) => {
-            particle.x += dt * particle.dx / 1000;
-            particle.y += dt * particle.dy / 1000;
-
-            particle.x = Math.min(Math.max(0, particle.x), this.xMax);
-            particle.y = Math.min(Math.max(0, particle.y), this.yMax);
-
-            let vx = targetX - particle.x;
-            let vy = targetY - particle.y;
-            let vLength = Math.sqrt((vx*vx) + (vy*vy));
-
-            particle.dx += vx / vLength;
-            particle.dy += vy / vLength;
-
-            // console.log(`x=${particle.x}\ty=${particle.y}\tdx=${particle.dx}\tdy=${particle.dy}`);
-        });
-    }
-    */
-
-    orbitCircleAnimation(dt, circleCenterX, circleCenterY, radius) {
-        this.particles.forEach((particle) => {
-            particle.x += dt * particle.dx / 1000;
-            particle.y += dt * particle.dy / 1000;
-
-            particle.x = Math.min(Math.max(-10, particle.x), this.xMax + 10);
-            particle.y = Math.min(Math.max(-10, particle.y), this.yMax + 10);
-
-            let vx = circleCenterX - particle.x;
-            let vy = circleCenterY - particle.y;
-            let vLength = Math.sqrt((vx*vx) + (vy*vy));
-
-            let vxNorm = vx / vLength;
-            let vyNorm = vy / vLength;
-
-            particle.dx += (vLength > radius ? 10 * vxNorm : 0.5 * vxNorm);
-            particle.dy += (vLength > radius ? 10 * vyNorm : 0.5 * vyNorm);
-
-            let vxPerpNorm = vy / vLength;
-            let vyPerpNorm = -1 * vx / vLength;
-
-            particle.dx += vxPerpNorm;
-            particle.dy += vyPerpNorm;
-
-            // console.log(`x=${particle.x}\ty=${particle.y}\tdx=${particle.dx}\tdy=${particle.dy}`);
-        });
-    }
-
-    updateSwarm(dt) {
-        if (this.animation) this.animation(dt);
     }
 
     renderSwarm(canvasContext) {
@@ -103,13 +49,80 @@ class Swarm {
 
 const CHERRY_SWARM_CANVAS_ID = 'cherry-swarm-canvas-id';
 
+class SwarmAnimation {
+    animate(swarm, dt) {
+        throw new Error('this should be overridden...');
+    }
+
+    onCanvasResize(oldWidth, oldHeight, newWidth, newHeight) {
+        throw new Error('this should be overriden...');
+    }
+}
+
+class OrbitPointSwarmAnimation extends SwarmAnimation{
+    constructor({orbitX, orbitY, radius}) {
+        super();
+
+        this.orbitX = orbitX;
+        this.orbitY = orbitY;
+        this.radius = radius;
+    }
+
+    animate(swarm, dt) {
+        let { orbitX, orbitY, radius } = this;
+        let { xMax, yMax, particles } = swarm;
+
+        particles.forEach((particle) => {
+            particle.x += dt * particle.dx / 1000;
+            particle.y += dt * particle.dy / 1000;
+
+            particle.x = Math.min(Math.max(-10, particle.x), xMax + 10);
+            particle.y = Math.min(Math.max(-10, particle.y), yMax + 10);
+
+            let vx = orbitX - particle.x;
+            let vy = orbitY - particle.y;
+            let vLength = Math.sqrt((vx*vx) + (vy*vy));
+
+            let vxNorm = vx / vLength;
+            let vyNorm = vy / vLength;
+
+            particle.dx += (vLength > radius ? 10 * vxNorm : 0.5 * vxNorm);
+            particle.dy += (vLength > radius ? 10 * vyNorm : 0.5 * vyNorm);
+
+            let vxPerpNorm = vy / vLength;
+            let vyPerpNorm = -1 * vx / vLength;
+
+            particle.dx += vxPerpNorm;
+            particle.dy += vyPerpNorm;
+
+            // console.log(`x=${particle.x}\ty=${particle.y}\tdx=${particle.dx}\tdy=${particle.dy}`);
+        });
+    }
+
+    onCanvasResize(oldWidth, oldHeight, newWidth, newHeight) {
+        this.orbitX = newWidth * (this.orbitX / oldWidth);
+        this.orbitY = newHeight * (this.orbitY / oldHeight);
+        console.log(`orbit animation - handling canvas resize: {orbitX: ${this.orbitX}, orbitY: ${this.orbitY}}`);
+    }
+}
+
+function generateSwarmAnimation(animationProps) {
+    console.log(`generating animation: ${JSON.stringify(animationProps)}`);
+    switch (animationProps.name) {
+        case 'orbit':
+            return new OrbitPointSwarmAnimation(animationProps);
+        default:
+            return new OrbitPointSwarmAnimation(animationProps);
+    }
+}
+
 class CherrySwarmCanvas extends LitElement {
 
     static get properties() {
         return {
             particleCount: {type: Number},
             swarmCount: {type: Number},
-            animationProps: {type: Object}
+            animationProps: {type: Object, reflect: true}
         };
     }
 
@@ -118,11 +131,12 @@ class CherrySwarmCanvas extends LitElement {
 
         this.particleCount = 1000;
         this.swarmCount = 1;
-        this.animationProps = {animationName: 'orbit', x: 0, y: 0};
+        this.animationProps = {name: 'orbit', orbitX: 0, orbitY: 0, radius: 50};
         
         this.swarms = [];
         this.lastAnimationFrameTime = null;
         this.numAnimationUpdates = 0;
+        this.animation = null;
 
         this.width = 0;
         this.height = 0;
@@ -135,11 +149,11 @@ class CherrySwarmCanvas extends LitElement {
 
         this.width = Math.max(1, this.shadowRoot.host.clientWidth);
         this.height = Math.max(1, this.shadowRoot.host.clientHeight);
-        console.log(`Resize(width: ${this.width}, height:${this.height})`);
         
-        this.swarms.forEach((swarm) => {
-            swarm.onCanvasResize(this.width, this.height);
-        });
+        if (this.animation)
+            this.animation.onCanvasResize(oldWidth, oldHeight, this.width, this.height);
+
+        this.swarms.forEach((swarm) => swarm.onCanvasResize(this.width, this.height));
 
         // https://stackoverflow.com/a/3078427
         const canvas = this.shadowRoot.getElementById(CHERRY_SWARM_CANVAS_ID);
@@ -148,12 +162,7 @@ class CherrySwarmCanvas extends LitElement {
             canvas.height = this.height;
         }
 
-        let oldAnimationX = this.animationProps.x;
-        let oldAnimationY = this.animationProps.y;
-
-        this.animationProps.x = Math.floor(this.width * (oldAnimationX / oldWidth));
-        this.animationProps.y = Math.floor(this.height * (oldAnimationY / oldHeight));
-        this.updateSwarmAnimations();
+        // this.updateSwarmAnimations();
     }
 
     connectedCallback() {
@@ -163,25 +172,35 @@ class CherrySwarmCanvas extends LitElement {
             this.swarms.push(new Swarm(this.width, this.height, this.particleCount, `hsl(0, 100%, ${getRandomInt(60, 90)}%)`));
         }
         
-        this.animationProps.animationName = 'orbit'
-        this.animationProps.x = Math.floor(this.width / 2);
-        this.animationProps.y = Math.floor(this.height / 2);
+        this.animationProps = {
+            name: 'orbit',
+            orbitX: Math.floor(this.width / 2),
+            orbitY: Math.floor(this.height / 2),
+            radius: 50
+        };
+        this.animation = generateSwarmAnimation(this.animationProps);
 
         requestAnimationFrame((timestamp) => this.updateCherry(timestamp));
-        this.updateSwarmAnimations();
+        // this.updateSwarmAnimations();
 
         window.addEventListener('resize', () => this.onResize());
     }
 
+    /*
     updateSwarmAnimations() {
         const { x, y, animationName } = this.animationProps;
 
-        if (animationName === 'orbit') {
+        if (animationName === SWARM_ANIMATIONS.ORBIT_POINT) {
             this.swarms.forEach((swarm) => {
                 swarm.animation = ((dt) => swarm.orbitCircleAnimation(dt, x, y, 50));
             });
+        } else if (animationName === SWARM_ANIMATIONS.MOVE_TO_POINT) {
+            this.swarms.forEach((swarm) => {
+                swarm.animation = ((dt) => swarm.moveToPointAnimation(dt, x, y));
+            });
         }
     }
+    */
     
     updateCherry(currentTime) {
         if (!this.lastAnimationFrameTime) this.lastAnimationFrameTime = currentTime;
@@ -197,13 +216,17 @@ class CherrySwarmCanvas extends LitElement {
         
         // this.swarm.moveToPointAnimation(dt, this.moveToX, this.moveToY);
         this.swarms.forEach((swarm) => {
-            swarm.updateSwarm(dt);
+            this.animation.animate(swarm, dt);
             swarm.renderSwarm(canvasContext);
         });
 
         this.lastAnimationFrameTime = currentTime;
-
         requestAnimationFrame((timestamp) => this.updateCherry(timestamp));
+    }
+
+    updated() {
+        this.animation = generateSwarmAnimation(this.animationProps);
+        // this.updateSwarmAnimations();
     }
 
     render() {

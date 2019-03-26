@@ -61,9 +61,15 @@
 <body>
     <div class="cherry-homepage-container">
         <div class="cherry-buttons">
-            <mwc-button raised>About Me</mwc-button>
-            <mwc-button raised>Experience</mwc-button>
-            <mwc-button raised>Projects</mwc-button>
+            <mwc-button id="cherry-btn-about-me" raised onmousedown="swarmOrbitElment('cherry-btn-about-me')">
+                About Me
+            </mwc-button>
+            <mwc-button id="cherry-btn-experience" raised onmousedown="swarmOrbitElment('cherry-btn-experience')">
+                Experience
+            </mwc-button>
+            <mwc-button id="cherry-btn-projects" raised onmousedown="swarmOrbitElment('cherry-btn-projects')">
+                Projects
+            </mwc-button>
         </div>
     
         <div class="cherry-brackets-container">
@@ -77,8 +83,51 @@
         </div>
     
         <div class="cherry-swarm-container">
-            <cherry-swarm particleCount="1000" swarmCount="5"></cherry-swarm>
+            <cherry-swarm id="cherry-bg-swarm" particleCount="1000" swarmCount="5"></cherry-swarm>
         </div>
     </div>
+    <script>
+        const cherrySwarmEl = document.getElementById('cherry-bg-swarm');
+
+        function swarmOrbitElment(elementId) {
+            console.log('swarmOrbitElement');
+
+            let element = document.getElementById(elementId);
+            console.dir(element);
+
+            let rect = element.getBoundingClientRect();
+            console.dir(rect);
+
+            let x = ((rect.right - rect.left) / 2) + rect.left;
+            let y = ((rect.bottom - rect.top) / 2) + rect.top;
+            cherrySwarmEl.animationProps = {name: 'orbit', orbitX: x, orbitY: y, radius: 10};
+
+            // let newAnimationProps = Object.assign({}, cherrySwarmEl.animationProps);
+            // newAnimationProps.x = ((rect.right - rect.left) / 2) + rect.left;
+            // newAnimationProps.y = ((rect.bottom - rect.top) / 2) + rect.top;
+            // cherrySwarmEl.animationProps = newAnimationProps;
+
+            setTimeout(() => swarmOrbitCenter(), 1000);
+        }
+
+        function swarmOrbitCenter() {
+            console.log('swarmOrbitCenter');
+
+            let element = document.getElementById('cherry-bg-swarm');
+            console.dir(element);
+
+            let rect = element.getBoundingClientRect();
+            console.dir(rect);
+
+            let x = ((rect.right - rect.left) / 2) + rect.left;
+            let y = ((rect.bottom - rect.top) / 2) + rect.top;
+            cherrySwarmEl.animationProps = {name: 'orbit', orbitX: x, orbitY: y, radius: 50};
+
+            // let newAnimationProps = Object.assign({}, cherrySwarmEl.animationProps);
+            // newAnimationProps.x = ((rect.right - rect.left) / 2) + rect.left;
+            // newAnimationProps.y = ((rect.bottom - rect.top) / 2) + rect.top;
+            // cherrySwarmEl.animationProps = newAnimationProps;
+        }
+    </script>
 </body>
 </html>
