@@ -28,20 +28,10 @@ class Swarm {
         }
     }
 
-    onCanvasResize(canvasWidth, canvasHeight) {
-        this.xMax = canvasWidth;
-        this.yMax = canvasHeight;
-    }
-
     renderSwarm(canvasContext) {
-        // const PI2 = 2 * Math.PI;
         canvasContext.fillStyle = this.color;
 
         this.particles.forEach((particle) => {
-            // canvasContext.beginPath();
-            // canvasContext.arc(particle.x, particle.y, 5, 0, PI2);
-            // canvasContext.fill();
-
             canvasContext.fillRect(particle.x, particle.y, 5, 5);
         });
     }
@@ -59,20 +49,21 @@ class SwarmAnimation {
     }
 }
 
-class OrbitPointSwarmAnimation extends SwarmAnimation{
-    constructor({orbitX, orbitY, radius}) {
+class OrbitPointSwarmAnimation extends SwarmAnimation {
+    constructor({orbitX, orbitY, radius, xMax, yMax}) {
         super();
 
         this.orbitX = orbitX;
         this.orbitY = orbitY;
         this.radius = radius;
+        this.xMax = xMax;
+        this.yMax = yMax;
     }
 
     animate(swarm, dt) {
-        let { orbitX, orbitY, radius } = this;
-        let { xMax, yMax, particles } = swarm;
+        let { orbitX, orbitY, radius, xMax, yMax } = this;
 
-        particles.forEach((particle) => {
+        swarm.particles.forEach((particle) => {
             particle.x += dt * particle.dx / 1000;
             particle.y += dt * particle.dy / 1000;
 
@@ -100,6 +91,8 @@ class OrbitPointSwarmAnimation extends SwarmAnimation{
     }
 
     onCanvasResize(oldWidth, oldHeight, newWidth, newHeight) {
+        this.xMax = newWidth;
+        this.yMax = newHeight;
         this.orbitX = newWidth * (this.orbitX / oldWidth);
         this.orbitY = newHeight * (this.orbitY / oldHeight);
         console.log(`orbit animation - handling canvas resize: {orbitX: ${this.orbitX}, orbitY: ${this.orbitY}}`);
@@ -131,7 +124,7 @@ class CherrySwarmCanvas extends LitElement {
 
         this.particleCount = 1000;
         this.swarmCount = 1;
-        this.animationProps = {name: 'orbit', orbitX: 0, orbitY: 0, radius: 50};
+        this.animationProps = {name: 'orbit', orbitX: 0, orbitY: 0, radius: 50, xMax: 0, yMax: 0};
         
         this.swarms = [];
         this.lastAnimationFrameTime = null;
@@ -150,10 +143,9 @@ class CherrySwarmCanvas extends LitElement {
         this.width = Math.max(1, this.shadowRoot.host.clientWidth);
         this.height = Math.max(1, this.shadowRoot.host.clientHeight);
         
-        if (this.animation)
+        if (this.animation) {
             this.animation.onCanvasResize(oldWidth, oldHeight, this.width, this.height);
-
-        this.swarms.forEach((swarm) => swarm.onCanvasResize(this.width, this.height));
+        }
 
         // https://stackoverflow.com/a/3078427
         const canvas = this.shadowRoot.getElementById(CHERRY_SWARM_CANVAS_ID);
@@ -176,31 +168,16 @@ class CherrySwarmCanvas extends LitElement {
             name: 'orbit',
             orbitX: Math.floor(this.width / 2),
             orbitY: Math.floor(this.height / 2),
-            radius: 50
+            radius: 50,
+            xMax: this.width,
+            yMax: this.height,
         };
+
         this.animation = generateSwarmAnimation(this.animationProps);
 
         requestAnimationFrame((timestamp) => this.updateCherry(timestamp));
-        // this.updateSwarmAnimations();
-
         window.addEventListener('resize', () => this.onResize());
     }
-
-    /*
-    updateSwarmAnimations() {
-        const { x, y, animationName } = this.animationProps;
-
-        if (animationName === SWARM_ANIMATIONS.ORBIT_POINT) {
-            this.swarms.forEach((swarm) => {
-                swarm.animation = ((dt) => swarm.orbitCircleAnimation(dt, x, y, 50));
-            });
-        } else if (animationName === SWARM_ANIMATIONS.MOVE_TO_POINT) {
-            this.swarms.forEach((swarm) => {
-                swarm.animation = ((dt) => swarm.moveToPointAnimation(dt, x, y));
-            });
-        }
-    }
-    */
     
     updateCherry(currentTime) {
         if (!this.lastAnimationFrameTime) this.lastAnimationFrameTime = currentTime;
@@ -214,7 +191,6 @@ class CherrySwarmCanvas extends LitElement {
         canvasContext.fillStyle = 'white';
         canvasContext.fillRect(0, 0, this.width, this.height);
         
-        // this.swarm.moveToPointAnimation(dt, this.moveToX, this.moveToY);
         this.swarms.forEach((swarm) => {
             this.animation.animate(swarm, dt);
             swarm.renderSwarm(canvasContext);
@@ -226,7 +202,6 @@ class CherrySwarmCanvas extends LitElement {
 
     updated() {
         this.animation = generateSwarmAnimation(this.animationProps);
-        // this.updateSwarmAnimations();
     }
 
     render() {

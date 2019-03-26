@@ -92,20 +92,19 @@
         function swarmOrbitElment(elementId) {
             console.log('swarmOrbitElement');
 
-            let element = document.getElementById(elementId);
-            console.dir(element);
+            let elRect = document.getElementById(elementId).getBoundingClientRect();
+            let swarmElRect = document.getElementById('cherry-bg-swarm').getBoundingClientRect();
 
-            let rect = element.getBoundingClientRect();
-            console.dir(rect);
-
-            let x = ((rect.right - rect.left) / 2) + rect.left;
-            let y = ((rect.bottom - rect.top) / 2) + rect.top;
-            cherrySwarmEl.animationProps = {name: 'orbit', orbitX: x, orbitY: y, radius: 10};
-
-            // let newAnimationProps = Object.assign({}, cherrySwarmEl.animationProps);
-            // newAnimationProps.x = ((rect.right - rect.left) / 2) + rect.left;
-            // newAnimationProps.y = ((rect.bottom - rect.top) / 2) + rect.top;
-            // cherrySwarmEl.animationProps = newAnimationProps;
+            let x = ((elRect.right - elRect.left) / 2) + elRect.left;
+            let y = ((elRect.bottom - elRect.top) / 2) + elRect.top;
+            cherrySwarmEl.animationProps = {
+                name: 'orbit',
+                orbitX: x,
+                orbitY: y,
+                radius: 50,
+                xMax: swarmElRect.right,
+                yMax: swarmElRect.bottom
+            };
 
             setTimeout(() => swarmOrbitCenter(), 1000);
         }
@@ -113,20 +112,18 @@
         function swarmOrbitCenter() {
             console.log('swarmOrbitCenter');
 
-            let element = document.getElementById('cherry-bg-swarm');
-            console.dir(element);
+            let swarmElRect = document.getElementById('cherry-bg-swarm').getBoundingClientRect();
 
-            let rect = element.getBoundingClientRect();
-            console.dir(rect);
-
-            let x = ((rect.right - rect.left) / 2) + rect.left;
-            let y = ((rect.bottom - rect.top) / 2) + rect.top;
-            cherrySwarmEl.animationProps = {name: 'orbit', orbitX: x, orbitY: y, radius: 50};
-
-            // let newAnimationProps = Object.assign({}, cherrySwarmEl.animationProps);
-            // newAnimationProps.x = ((rect.right - rect.left) / 2) + rect.left;
-            // newAnimationProps.y = ((rect.bottom - rect.top) / 2) + rect.top;
-            // cherrySwarmEl.animationProps = newAnimationProps;
+            let x = ((swarmElRect.right - swarmElRect.left) / 2) + swarmElRect.left;
+            let y = ((swarmElRect.bottom - swarmElRect.top) / 2) + swarmElRect.top;
+            cherrySwarmEl.animationProps = {
+                name: 'orbit',
+                orbitX: x,
+                orbitY: y,
+                radius: 50,
+                xMax: swarmElRect.right,
+                yMax: swarmElRect.bottom
+            };
         }
     </script>
 </body>
