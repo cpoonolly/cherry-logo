@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <style>
+        .cherry-homepage-container {
+            position: relative;
+        }
+
+        .cherry-buttons {
+            position: absolute;
+            width: calc(100vw);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+        }
+
+        .cherry-buttons mwc-button {
+            --mdc-theme-on-primary: white;
+            --mdc-theme-primary: red;
+            --mdc-theme-on-secondary: white;
+            --mdc-theme-secondary: red;
+
+            padding: 3px;
+            margin: 10px;
+        }
+
+        .cherry-brackets-container {
+            position: absolute;
+            width: calc(100vw);
+            height: calc(100vh);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .cherry-swarm-container {
+            position: absolute;
+            width: calc(100vw);
+            height: calc(100vh);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .cherry-swarm-container cherry-swarm {
+            width: 100%;
+            height: 100%;
+        }
+
+        .cherry-slot {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+            max-width: 500px;
+            color: hsl(0, 100%, 20%);
+        }
+    </style>
+
+    <!-- Materialize Compiled and minified CSS/JavaScript -->
+    <!-- TODO - Move this to webpack -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+
+    <title>Test Page for Cherry's Logo Webcomponent</title>
+</head>
+<body>
+    <div class="cherry-homepage-container">
+        <div class="cherry-buttons">
+            <mwc-button id="cherry-btn-about-me" raised onmousedown="onAboutMeBtnClick()">
+                About Me
+            </mwc-button>
+            <mwc-button id="cherry-btn-experience" raised onmousedown="onExperienceBtnClick()">
+                Experience
+            </mwc-button>
+            <mwc-button id="cherry-btn-projects" raised onmousedown="onProjectsBtnClick()">
+                Projects
+            </mwc-button>
+        </div>
+    
+        <div class="cherry-brackets-container">
+            <cherry-brackets id="cherry-example-brackets" currentSlot="0">
+                <div slot="slot0" class="cherry-slot-logo">
+                    <cherry-logo></cherry-logo>
+                </div>
+                <div slot="slot1" class="cherry-slot">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title"><h3>About Me!</h3></span>
+                            <p>
+                                Too lazy to fill this out now but there will definitely be stuff here!
+                                There might even be multiple lines of text here.
+                                That's how much stuff there is going to be!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div slot="slot2" class="cherry-slot">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title"><h3>Experience!</h3></span>
+                            <p>
+                                So much experience folks. Tremendous amounts of experience. Greatest experience in the world.
+                                My people tell me. You know what they tell me? I've got great experience.
+                                It's amazing ladies and gentlement. My experience is spectacular.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div slot="slot3" class="cherry-slot">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title"><h3>Projects!</h3></span>
+                            <p>Pigeon RTC:</p>
+                            <a href="https://cpoonolly.github.io/pigeon-rtc/">Website</a><br/>
+                            <a href="https://github.com/cpoonolly/pigeon-rtc">Github</a><br/>
+                            <br/>
+                            <p>Poker Chip Counter:</p>
+                            <a href="https://expo.io/@cpoonolly/PokerChipCounter">Expo</a><br/>
+                            <a href="https://github.com/cpoonolly/pokerchipcounter">Github</a><br/>
+                        </div>
+                        <div class="card-tabs">
+                            
+                        </div>
+                        <div class="card-content grey lighten-4">
+                            <div id="project1">
+                                
+                            </div>
+                            <div id="project2">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </cherry-brackets>
+        </div>
+    
+        <div class="cherry-swarm-container">
+            <cherry-swarm id="cherry-bg-swarm" particleCount="500" swarmCount="5"></cherry-swarm>
+        </div>
+    </div>
+    <script>
+        const cherrySwarmEl = document.getElementById('cherry-bg-swarm');
+
+        function onAboutMeBtnClick() {
+            bracketsSwitchSlot(1);
+            swarmGoCrazy();
+        }
+
+        function onExperienceBtnClick() {
+            bracketsSwitchSlot(2);
+            swarmGoCrazy();
+        }
+
+        function onProjectsBtnClick() {
+            bracketsSwitchSlot(3);
+            swarmGoCrazy();
+        }
+
+        function bracketsSwitchSlot(slotNum) {
+            document.getElementById('cherry-example-brackets').setAttribute('currentSlot', slotNum);
+        }
+
+        function swarmGoCrazy() {
+            console.log('swarmOrbitElement');
+
+            let swarmElRect = document.getElementById('cherry-bg-swarm').getBoundingClientRect();
+            let swarmElX = ((swarmElRect.right - swarmElRect.left) / 2) + swarmElRect.left;
+            let swarmElY = ((swarmElRect.bottom - swarmElRect.top) / 2) + swarmElRect.top;
+
+            let animationSequence = [];
+
+            // first freeze .1s
+            animationSequence.push({
+                duration: 100,
+                animationProps: {name: 'freeze'}
+            });
+
+            // then go grazy for 1s
+            animationSequence.push({
+                duration: 1000,
+                animationProps: {
+                name: 'random',
+                    xMax: swarmElRect.right,
+                    yMax: swarmElRect.bottom
+                }
+            });
+
+            // then freeze for another .1s
+            animationSequence.push({
+                duration: 100,
+                animationProps: {name: 'freeze'}
+            });
+
+            // then orbit back around the center
+            animationSequence.push({
+                animationProps: {
+                    name: 'orbit',
+                    orbitX: swarmElX,
+                    orbitY: swarmElY,
+                    radius: 50,
+                    xMax: swarmElRect.right,
+                    yMax: swarmElRect.bottom
+                }
+            });
+
+            cherrySwarmEl.animationProps = {
+                name: 'sequence',
+                animationSequence: animationSequence
+            };
+        }
+
+        /*
+        function swarmOrbitElment(elementId) {
+            console.log('swarmOrbitElement');
+
+            let elRect = document.getElementById(elementId).getBoundingClientRect();
+            let elPosX = ((elRect.right - elRect.left) / 2) + elRect.left;
+            let elPosY = ((elRect.bottom - elRect.top) / 2) + elRect.top;
+            
+            let swarmElRect = document.getElementById('cherry-bg-swarm').getBoundingClientRect();
+            let swarmElX = ((swarmElRect.right - swarmElRect.left) / 2) + swarmElRect.left;
+            let swarmElY = ((swarmElRect.bottom - swarmElRect.top) / 2) + swarmElRect.top;
+
+            let animationProps = [];
+            let durations = [];
+
+            // first orbit around element for 1s
+            durations.push(1000);
+            animationProps.push({
+                name: 'orbit',
+                orbitX: elPosX,
+                orbitY: elPosY,
+                radius: 50,
+                xMax: swarmElRect.right,
+                yMax: swarmElRect.bottom
+            });
+
+            // then orbit back around the center
+            durations.push(null);
+            animationProps.push({
+                name: 'orbit',
+                orbitX: swarmElX,
+                orbitY: swarmElY,
+                radius: 50,
+                xMax: swarmElRect.right,
+                yMax: swarmElRect.bottom
+            });
+
+            cherrySwarmEl.animationProps = {
+                name: 'sequence',
+                animationProps: animationProps,
+                durations: durations
+            };
+        }
+
+        function swarmOrbitCenter() {
+            console.log('swarmOrbitCenter');
+
+            let swarmElRect = document.getElementById('cherry-bg-swarm').getBoundingClientRect();
+            let swarmElX = ((swarmElRect.right - swarmElRect.left) / 2) + swarmElRect.left;
+            let swarmElY = ((swarmElRect.bottom - swarmElRect.top) / 2) + swarmElRect.top;
+
+            cherrySwarmEl.animationProps = {
+                name: 'orbit',
+                orbitX: swarmElX,
+                orbitY: swarmElY,
+                radius: 50,
+                xMax: swarmElRect.right,
+                yMax: swarmElRect.bottom
+            };
+        }
+        */
+    </script>
+</body>
+</html>
