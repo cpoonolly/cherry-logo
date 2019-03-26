@@ -173,23 +173,26 @@ class FreezeSwarmAnimation extends SwarmAnimation {
 }
 
 class SwarmAnimationSequence extends SwarmAnimation {
-    constructor({animationProps, durations}) {
+    // should be an array of objects with signature: {animationProps, duration}
+    constructor({animationSequence}) {
         super();
 
-        if (animationProps.length !== durations.length) {
-            throw Error('invalid animation sequence - durations and animationProps have different lengths');
-        }
+        if (!animationSequence || animationSequence.length <= 0)
+            throw Error('sequence animation - invalid animation sequence');
 
-        this.animations = [];
-        
         let atTime = 0;
-        for (let i = 0; i < animationProps.length; i++) {
-            let animation = generateSwarmAnimation(animationProps[i]);
-            let duration = durations[i];
-
+        this.animations = [];
+        animationSequence.forEach(({animationProps, duration}, index) => {
+            let animation = generateSwarmAnimation(animationProps); // will throw an exception if incorrect
             this.animations.push({animation, atTime});
-            atTime += duration; // doesn't really matter for the last one
-        }
+
+            if (index < animationSequence.length - 1) {
+                if (duration === null || duration === undefined)
+                    throw new Error(`sequence animation - invalid animation #${index + 1} in sequence invalid`);
+
+                atTime += duration; // doesn't matter for the last one   
+            }
+        })
         
         this.timeStarted = null;
         this.timeElapsed = 0;

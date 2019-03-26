@@ -46,12 +46,14 @@ class CherryBrackets extends LitElement {
         return html`
             <style>
                 @keyframes brackets-animation {
-                    from { max-width: calc(0vw); }
-                    to { max-width: calc(100vw); }
+                    0% { max-width: calc(100vw); visibility: hidden; }
+                    50% { max-width: calc(0vw); visibility: hidden; }
+                    100% { max-width: calc(100vw); visibility: visible; }
                 }
 
                 .brackets-container {
-                    display: flex;animation-name: cherries-rotation;
+                    display: flex;
+                    animation-name: cherries-rotation;
                     animation-duration: 4s;
                     align-items: center;
                     justify-content: center;
