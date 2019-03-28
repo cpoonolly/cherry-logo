@@ -14,6 +14,7 @@
             position: absolute;
             width: calc(100vw);
             height: 200px;
+            max-height: calc(15vh);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -70,6 +71,28 @@
             max-width: 200px;
         }
 
+        #cherry-projects .showcase-card {
+          padding: 20px;
+          max-width: 300px;
+        }
+
+        #cherry-projects .showcase-card-img {
+          min-width: 200px;
+        }
+
+        #cherry-projects .showcase-card-link {
+          margin: 0px 5px;
+        }
+
+        .cherry-name-tooltip {
+          max-width: 350px;
+        }
+
+        @media only screen and (max-width: 350px) {
+          .cherry-buttons .cherry-button {
+            font-size: 10px;
+          }
+        }
     </style>
 
     <!-- TODO - Move these to webpack -->
@@ -78,6 +101,7 @@
     <!-- Materialize Compiled and minified CSS/JavaScript -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <title>Test Page for Cherry's Logo Webcomponent</title>
 </head>
@@ -106,18 +130,22 @@
                                 <a class="tooltipped" 
                                     data-position="top" 
                                     data-tooltip="
-                                        I was born in Kerala, India with the name Cherry.<br/>
-                                        Cherry was a pretty common name in Kerala & I was actually named after my grandfather (his name was Cherian).<br/>
-                                        <br/>
-                                        Unfortunately when my family moved to the US, my parents quickly realized that they had named their son after a fruit...<br/>
-                                        So in an attempt to spare me a life of ridicule, they renamed me to Ryan. ('Ryan' comes from the 'rian' in 'Che'-'rian')<br/> 
-                                        <br/>
-                                        Unfortunately I still found plenty of other ways to condemn myself to a life of ridicule...<br/>
-                                        So the name change was pretty ineffective & I resolved to just stick with Cherry<br/>
-                                        <br/>
+                                      <div class='cherry-name-tooltip'>
+                                        I was born in Kerala, India with the name Cherry. Cherry was a pretty common name in Kerala
+                                        & I was actually named after my grandfather (his name was Cherian).
+                                        <br/><br/>
+                                        Unfortunately when my family moved to the US, my parents quickly realized that they had named their son after a fruit...
+                                        So in an attempt to spare me a life of ridicule, they renamed me to Ryan. ('Ryan' comes from the 'rian' in 'Cherian')
+                                        <br/><br/> 
+                                        Unfortunately I still found plenty of other ways to condemn myself to a life of ridicule
+                                        (by sporting a really embarrassing hairdo for most of high school/college for instance)
+                                        <br/><br/>
+                                        ...So since the name change was pretty ineffective, I resolved to just stick with Cherry.
+                                        <br/><br/>
                                         The end result? I'm officially Ryan on paper, but everyone just calls me Cherry.. which is good, I prefer Cherry :)
+                                      </div>
                                     "
-                                >(it's a long story)</a>
+                                >(Why Cherry? It's a long story...)</a>
                             </p>
                             <br/>
                             <p class="center-align flow-text">
@@ -138,35 +166,8 @@
                         </div>
                     </div>
                 </div>
-                <div slot="slot3" class="cherry-slot">
-                    <div class="card">
-                        <span class="card-title center-align"><h3>Projects!</h3></span>
-
-                        <!-- <div class="card-content">
-                            <div class="collection">
-                                <a href="https://github.com/cpoonolly/pigeon-rtc" class="collection-item avatar">
-                                    <img src="./imgs/cherryProfilePic.jpg" alt="" class="circle">
-                                    <h5>Pigeon RTC</h5>
-                                </a>
-                                <a href="https://github.com/cpoonolly/task-graph" class="collection-item avatar">
-                                    <img src="./imgs/cherryProfilePic.jpg" alt="" class="circle">
-                                    <h5>Task Graph</h5>
-                                </a>
-                                <a href="https://github.com/cpoonolly/pokerchipcounter" class="collection-item avatar">
-                                    <img src="./imgs/cherryProfilePic.jpg" alt="" class="circle">
-                                    <h5>Poker Chip Counter</h5>
-                                </a>
-                                <a href="https://github.com/cpoonolly/nyc_dob_etl" class="collection-item avatar">
-                                    <img src="./imgs/cherryProfilePic.jpg" alt="" class="circle">
-                                    <h5>NYC DOB Permits ETL</h5>
-                                </a>
-                                <a href="https://github.com/cpoonolly/BitTorrentClient" class="collection-item avatar">
-                                    <img src="./imgs/cherryProfilePic.jpg" alt="" class="circle">
-                                    <h5>BitTorrient CLI Client</h5>
-                                </a>
-                            </div>
-                        </div> -->
-                    </div>
+                <div id="cherry-projects" slot="slot3" class="cherry-slot">
+                  <!-- Populated with logic in index.js -->
                 </div>
             </cherry-brackets>
         </div>
