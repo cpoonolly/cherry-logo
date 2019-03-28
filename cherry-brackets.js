@@ -1,11 +1,11 @@
 import { LitElement, html } from 'lit-element';
 
-const ANIMATION_DURATION = 5;
-
 class CherryBrackets extends LitElement {
     static get properties() {
         return {
-            currentSlot: {type: Number}
+            currentSlot: {type: Number},
+            color: {type: String },
+            animationDuration: {type: Number},
         }
     }
 
@@ -13,6 +13,8 @@ class CherryBrackets extends LitElement {
         super();
 
         this.currentSlot = 1;
+        this.color = 'black';
+        this.animationDuration = 5;
     }
 
     updated(changedProperties) {
@@ -47,7 +49,7 @@ class CherryBrackets extends LitElement {
             <style>
                 @keyframes brackets-animation {
                     0% { max-width: calc(100vw); visibility: hidden; }
-                    50% { max-width: calc(0vw); visibility: hidden; }
+                    30% { max-width: calc(0vw); visibility: hidden; }
                     100% { max-width: calc(100vw); visibility: visible; }
                 }
 
@@ -60,23 +62,24 @@ class CherryBrackets extends LitElement {
                 }
 
                 .bracket {
-                    stroke: hsl(0, 100%, 30%);
+                    stroke: ${this.color};
                     stroke-width: 5px;
                     fill: none;
                 }
 
                 .bracket-left-container, .bracket-right-container {
-                    flex-grow: 1;
+                    flex-shrink: 1;
                 }
 
                 #brackets-content {
-                    overflow: hidden;
+                    flex-grow: 1;
                 }
 
                 .brackets-content-animated {
                     animation-name: brackets-animation;
-                    animation-duration: ${ANIMATION_DURATION}s;
+                    animation-duration: ${this.animationDuration}s;
                 }
+
             </style>
             <div class="brackets-container">
                 <div class="bracket-left-container">
