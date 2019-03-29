@@ -41,7 +41,7 @@ function onProjectsBtnClick() {
 }
 
 function bracketsSwitchSlot(slotNum) {
-  document.getElementById('cherry-example-brackets').setAttribute('currentSlot', slotNum);
+  document.getElementById('cherry-brackets').setAttribute('currentSlot', slotNum);
 }
 
 function swarmSetColors() {
