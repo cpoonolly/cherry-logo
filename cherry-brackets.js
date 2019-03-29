@@ -68,11 +68,11 @@ class CherryBrackets extends LitElement {
                 }
 
                 .bracket-left-container, .bracket-right-container {
-                    flex: 0 1 auto;
+                    flex-shrink: 1;
                 }
 
                 #brackets-content {
-                    flex: 1 0 auto;
+                    flex-grow: 1;
                 }
 
                 .brackets-content-animated {
@@ -90,7 +90,7 @@ class CherryBrackets extends LitElement {
             </style>
             <div class="brackets-container">
                 <div class="bracket-left-container">
-                    <svg width="100%" viewbox="0 0 50 100" preserveAspectRatio="none">
+                    <svg width="100%" height="100%" viewbox="0 0 50 100" preserveAspectRatio="none">
                         <path id="bracket-left" class="bracket" d="M 40.00,10.00 C 0.00,10.00 50.00,50.00 10.00,50.00 50.00,50.00 0.00,90.00 40.00,90.00"></path>
                     </svg>
                 </div>
@@ -98,7 +98,7 @@ class CherryBrackets extends LitElement {
                     <slot name="slot${this.currentSlot}"></slot>
                 </div>
                 <div class="bracket-right-container">
-                    <svg width="100%" viewbox="0 0 50 100" preserveAspectRatio="none">
+                    <svg width="100%" height="100%" viewbox="0 0 50 100" preserveAspectRatio="none">
                         <path id="bracket-left" class="bracket" d="M 10.00,10.00 C 50.00,10.00 0.00,50.00 40.00,50.00 0.00,50.00 50.00,90.00 10.00,90.00"></path>
                     </svg>
                 </div>
