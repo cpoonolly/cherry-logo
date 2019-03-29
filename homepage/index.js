@@ -25,21 +25,6 @@ function getRandomShadeOfRed() {
   return `hsl(0, 100%, ${getRandomInt(60, 90)}%)`;
 }
 
-function onAboutMeBtnClick() {
-  bracketsSwitchSlot(1);
-  swarmGoCrazy();
-}
-
-function onExperienceBtnClick() {
-  bracketsSwitchSlot(2);
-  swarmGoCrazy();
-}
-
-function onProjectsBtnClick() {
-  bracketsSwitchSlot(3);
-  swarmGoCrazy();
-}
-
 function bracketsSwitchSlot(slotNum) {
   document.getElementById('cherry-brackets').setAttribute('currentSlot', slotNum);
 }
@@ -119,18 +104,17 @@ const experienceShowCase = new ShowCase(render, 'cherry-experience', [
     imgSrc: honestBuildingsImg,
     content: html`
       <h6>Senior Software Engineer & Technical Lead</h6>
-      <!--<p>Feb 2015 to Oct 2018</p>-->
-      <br/>
+    `,
+    reveal: html`
       <p>
-        Honest Buildings is a asset management tool used by some of the largest owners in real estate.
+        Honest Buildings is a asset management tool used by some of the largest owners in real estate (Vornado, Brookfield, SL Green).
         <br/><br/>
-        I initially joined HB 3 years ago and got to watch the company grow from ~15 to >100 people.
+        I initially joined HB 3 years ago and got to watch the company grow from ~15 to >100 people. It was an incredibly valuable experience scaling the business & team up.
         <br/><br/>
-        It was an incredibly valuable experience scaling the business & team up.
+        After devivering several high impact projects (our primary user dashboard, our permissions system, cost tracking, etc.)
+        I was eventually given the opportunity to lead a small squad of 4.
         <br/><br/>
-        After devivering several high impact projects such our primary user dashboard, our permissions system, cost tracking, etc.
-        <br/><br/>
-        I was eventually given the opportunity to lead a small squad of 4. Together we delivered some key projects including capital planning & internationalization.
+        Together we delivered some key projects including capital planning & internationalization.
       </p>
     `
   }),
@@ -139,21 +123,44 @@ const experienceShowCase = new ShowCase(render, 'cherry-experience', [
     imgSrc: goldmanSachsImg,
     content: html`
       <h6>Technical Analyst</h6>
-      <p>Jul 2013 to Feb 2015</p> 
+    `,
+    reveal: html`
+      <p>
+        I joined Goldman Sachs after graduating college. I had previously worked there as a summer intern & was given an offer to return at the end of the summer.
+        <br/><br/>
+        At GS my team's role was to calculate firmwide exposure to counterparty default (answer the question if 'CompanyX' goes bankrupt how much money could we lose?).
+        <br/><br/>
+        We would then apply fees on GS traders for buying/selling securities with high firmwide exposure (Ex: if GS's owns a lot of debt from 'CompanyX' we wouldn't want to be buy 'CompanyX' stocks as that would further increase firmwide exposure)
+      </p>
     `
   }),
   new ShowCaseItem({
     title: 'Internships',
     imgSrc: internshipsImg,
-    content: html`
-      <h6>Technical Analyst</h6>
-      <p>Jul 2013 to Feb 2015</p>
+    reveal: html`
+      <p>
+        <strong>Summer 2012:</strong><br/>
+        Summer Technical Analyst at Goldman Sachs
+        <br/><br/>
+        <strong>Summer 2011:</strong><br/>
+        Applications Intern at Guardian Life Insurance.
+        <br/><br/>
+        <strong>Summer 2010:</strong><br/>
+        Operations Intern at APG Asset Managmenet.
+      </p>
     `
   }),
   new ShowCaseItem({
     title: 'Volunteer Experience',
     imgSrc: volunteerImg,
-    content: html`
+    reveal: html`
+      <p>
+        <strong>The Green Lion (Vietnam):</strong><br/>
+        Taught English at a local university, worked at a soup kitchen, & delivered food to hospital.
+        <br/><br/>
+        <strong>UBECI (Ecuador):</strong><br/>
+        Built simple maintable website the NGO & edited a video for a Christmas fundraising campaign.
+      </p>
     `
   })
 ]);
@@ -212,9 +219,26 @@ const projectShowCase = new ShowCase(render, 'cherry-projects', [
   })
 ]);
 
+function onAboutMeBtnClick() {
+  bracketsSwitchSlot(1);
+  swarmGoCrazy();
+}
+
+function onExperienceBtnClick() {
+  bracketsSwitchSlot(2);
+  experienceShowCase.curItemIndex = 0;
+  experienceShowCase.render();
+  swarmGoCrazy();
+}
+
+function onProjectsBtnClick() {
+  bracketsSwitchSlot(3);
+  projectShowCase.curItemIndex = 0;
+  projectShowCase.render();
+  swarmGoCrazy();
+}
+
 $(document).ready(() => {
   $('.tooltipped').tooltip();
-  projectShowCase.render();
-  experienceShowCase.render();
   swarmSetColors();  
 });

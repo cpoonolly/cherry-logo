@@ -57,8 +57,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100%;
-            width: 100%;
             overflow: hidden;
             color: hsl(0, 100%, 20%);
         }
@@ -67,14 +65,18 @@
             max-width: 300px;
         }
 
-        img.cherry-profile-pic.responsive-img {
-            max-width: 200px;
+        #cherry-about-me, #cherry-experience, #cherry-projects {
+          /* padding: 20px */
         }
 
-        #cherry-experience .showcase-card {
+        #cherry-about-me img.cherry-profile-pic.responsive-img {
+          max-width: 200px;
+        }
+
+        #cherry-experience .showcase-card,
+        #cherry-projects .showcase-card {
           padding: 20px;
-          max-width: 500px;
-          min-width: 300px;
+          max-width: 260px;
         }
 
         #cherry-experience .showcase-card .card-image {
@@ -86,11 +88,6 @@
         #cherry-experience .showcase-card-img {
           width: 200px;
           height: 200px;
-        }
-
-        #cherry-projects .showcase-card {
-          padding: 20px;
-          max-width: 300px;
         }
 
         #cherry-projects .showcase-card-img {
@@ -135,8 +132,8 @@
                 <div slot="slot0" class="cherry-slot-logo">
                     <cherry-logo></cherry-logo>
                 </div>
-                <div slot="slot1" class="cherry-slot">
-                    <div class="card">
+                <div id="cherry-about-me" slot="slot1" class="cherry-slot">
+                    <div class="card grey lighten-5">
                         <div class="card-content">
                             <span class="card-title center-align">
                                 <h3>About Me</h3>
@@ -154,12 +151,13 @@
                                         Unfortunately when my family moved to the US, my parents quickly realized that they had named their son after a fruit...
                                         So in an attempt to spare me a life of ridicule, they renamed me to Ryan. ('Ryan' comes from the 'rian' in 'Cherian')
                                         <br/><br/> 
-                                        Unfortunately I still found plenty of other ways to condemn myself to a life of ridicule
-                                        (by sporting a really embarrassing hairdo for most of high school/college for instance)
+                                        Unfortunately, despite their efforts, I found plenty of other ways to ridicule myself over the years
+                                        (I had a particularly embarrasing hairdo throughout highschool/college).
+                                        So ultimately I resolved to just stick with Cherry.
                                         <br/><br/>
-                                        ...So since the name change was pretty ineffective, I resolved to just stick with Cherry.
+                                        The end result? I'm officially Ryan on paper, but everyone just calls me Cherry!
                                         <br/><br/>
-                                        The end result? I'm officially Ryan on paper, but everyone just calls me Cherry.. which is good, I prefer Cherry :)
+                                        ..which is good, I prefer Cherry :)
                                       </div>
                                     "
                                 >(Why Cherry? It's a long story...)</a>

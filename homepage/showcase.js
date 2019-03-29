@@ -2,10 +2,11 @@ import { html } from 'lit-html';
 
 /** Not making these web components since they rely on materialize & the scopes for these things are isolated */
 class ShowCaseItem {
-  constructor({title, imgSrc, content}) {
+  constructor({title, imgSrc, content, reveal}) {
     this.title = title;
     this.imgSrc = imgSrc;
     this.content = content;
+    this.reveal = reveal;
   }
 
   getTemplate() {
@@ -23,6 +24,17 @@ class ShowCaseItem {
       ${this.content ? html`
         <div class="card-content center-align">
           ${this.content}
+        </div>
+      ` : ''}
+      ${this.reveal ? html`
+        <div class="card-content center-align">
+          <a href="#" class="activator">More</a>
+        </div>
+        <div class="card-reveal">
+          <div style="padding: 50px 50px 0 0"><!-- Padding is buggy in materialize for some reason.. -->
+            <span class="card-title grey-text text-darken-4" style=""><i class="material-icons right">close</i></span>
+            ${this.reveal}
+          </div>
         </div>
       ` : ''}
     `;
@@ -61,7 +73,7 @@ class ShowCase {
     const isLastItem = (this.curItemIndex === this.showCaseItems.length - 1);
 
     return html`
-      <div class="showcase-card card">
+      <div class="showcase-card card grey lighten-5">
         ${curShowCaseItem.getTemplate()}
         <div class="card-actions">
           <a class="showcase-prev-btn btn-floating red left ${isFirstItem ? 'disabled' : ''}" @click=${() => this.onPrevBtnClick()}>
