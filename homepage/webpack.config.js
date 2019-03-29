@@ -23,7 +23,7 @@ const PROD_CONFIG = {
         'css-loader'
       ]
     }, {
-      test: /\.(png|svg|jpg|gif)$/,
+      test: /\.(png|svg|jpg|gif|jpeg)$/,
       use: [
         'file-loader'
       ]

@@ -1,9 +1,16 @@
 import '../index';
+
+import honestBuildingsImg from './imgs/honestbuildings.jpeg';
+import goldmanSachsImg from './imgs/goldmansachs.png';
+import internshipsImg from './imgs/internships.png';
+import volunteerImg from './imgs/volunteer.png';
+
 import pigeonImg from './imgs/pigeon.svg';
 import pokerchipImg from './imgs/pokerchip.png';
 import taskGraphImg from './imgs/taskgraph.svg';
 import nycDOBImg from './imgs/nycdob.png';
 import githubImg from './imgs/github.png';
+
 import { ShowCase, ShowCaseItem } from './showcase';
 import { html, render } from 'lit-html';
 
@@ -31,18 +38,6 @@ function onExperienceBtnClick() {
 function onProjectsBtnClick() {
   bracketsSwitchSlot(3);
   swarmGoCrazy();
-}
-
-function onProjectShowcaseNextBtnClick() {
-  let bracketsEl = document.getElementById('cherry-example-brackets');
-
-  bracketsSwitchSlot(bracketsEl.currentSlot + 1);
-}
-
-function onProjectShowCasePrevBtnClick() {
-  let bracketsEl = document.getElementById('cherry-example-brackets');
-
-  bracketsSwitchSlot(bracketsEl.currentSlot - 1);
 }
 
 function bracketsSwitchSlot(slotNum) {
@@ -118,6 +113,51 @@ $('#cherry-btn-about-me').click(() => onAboutMeBtnClick());
 $('#cherry-btn-experience').click(() => onExperienceBtnClick());
 $('#cherry-btn-projects').click(() => onProjectsBtnClick());
 
+const experienceShowCase = new ShowCase(render, 'cherry-experience', [
+  new ShowCaseItem({
+    title: 'Honest Buildings',
+    imgSrc: honestBuildingsImg,
+    content: html`
+      <h6>Senior Software Engineer & Technical Lead</h6>
+      <!--<p>Feb 2015 to Oct 2018</p>-->
+      <br/>
+      <p>
+        Honest Buildings is a asset management tool used by some of the largest owners in real estate.
+        <br/><br/>
+        I initially joined HB 3 years ago and got to watch the company grow from ~15 to >100 people.
+        <br/><br/>
+        It was an incredibly valuable experience scaling the business & team up.
+        <br/><br/>
+        After devivering several high impact projects such our primary user dashboard, our permissions system, cost tracking, etc.
+        <br/><br/>
+        I was eventually given the opportunity to lead a small squad of 4. Together we delivered some key projects including capital planning & internationalization.
+      </p>
+    `
+  }),
+  new ShowCaseItem({
+    title: 'Goldman Sachs',
+    imgSrc: goldmanSachsImg,
+    content: html`
+      <h6>Technical Analyst</h6>
+      <p>Jul 2013 to Feb 2015</p> 
+    `
+  }),
+  new ShowCaseItem({
+    title: 'Internships',
+    imgSrc: internshipsImg,
+    content: html`
+      <h6>Technical Analyst</h6>
+      <p>Jul 2013 to Feb 2015</p>
+    `
+  }),
+  new ShowCaseItem({
+    title: 'Volunteer Experience',
+    imgSrc: volunteerImg,
+    content: html`
+    `
+  })
+]);
+
 const projectShowCase = new ShowCase(render, 'cherry-projects', [
   new ShowCaseItem({
     title: 'Pigeon RTC',
@@ -173,7 +213,8 @@ const projectShowCase = new ShowCase(render, 'cherry-projects', [
 ]);
 
 $(document).ready(() => {
-  $('.tooltipped').tooltip({html: '<h1>Hello world</h1>'});
+  $('.tooltipped').tooltip();
   projectShowCase.render();
+  experienceShowCase.render();
   swarmSetColors();  
 });

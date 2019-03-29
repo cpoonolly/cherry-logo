@@ -71,6 +71,23 @@
             max-width: 200px;
         }
 
+        #cherry-experience .showcase-card {
+          padding: 20px;
+          max-width: 500px;
+          min-width: 300px;
+        }
+
+        #cherry-experience .showcase-card .card-image {
+          display: flex;
+          justify-content: center;
+          justify-items: center;
+        }
+
+        #cherry-experience .showcase-card-img {
+          width: 200px;
+          height: 200px;
+        }
+
         #cherry-projects .showcase-card {
           padding: 20px;
           max-width: 300px;
@@ -154,8 +171,9 @@
                         </div>
                     </div>
                 </div>
-                <div slot="slot2" class="cherry-slot">
-                    <div class="card">
+                <div id="cherry-experience" slot="slot2" class="cherry-slot">
+                    <!-- Populated with logic in index.js -->
+                    <!-- <div class="card">
                         <div class="card-content">
                             <span class="card-title center-align"><h3>Experience!</h3></span>
                             <p>
@@ -164,7 +182,7 @@
                                 It's amazing ladies and gentlement. My experience is spectacular.
                             </p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div id="cherry-projects" slot="slot3" class="cherry-slot">
                   <!-- Populated with logic in index.js -->
