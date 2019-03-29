@@ -39,7 +39,7 @@ class CherrySwarmCanvas extends LitElement {
 
     this.particleCount = 1000;
     this.animationProps = { name: 'orbit', orbitX: 0, orbitY: 0, radius: 50, xMax: 0, yMax: 0 };
-    this.renderProps = { name: 'single-colored-rect', color: 'black', width: 3, height: 3 };
+    this.renderProps = { name: 'single-colored-rect', color: 'black', size: 3 };
 
     this.swarm = null;
     this.lastAnimationFrameTime = null;
