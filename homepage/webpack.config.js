@@ -8,7 +8,7 @@ const PROD_CONFIG = {
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
-    new HtmlWebpackPlugin({filename: 'index.html', template: 'index.html'})
+    new HtmlWebpackPlugin({filename: 'index.html', template: 'index.html', favicon: './imgs/favicon.ico'})
   ],
   module:{
     rules:[{
