@@ -161,8 +161,8 @@ const projectShowCase = new ShowCase(render, 'cherry-projects', [
       <p>A simple app for creating & organizing tasks & subtasks.</p><br/>
       <p>Build with: Angular2, Angular Material, & ngx-md (for displaying markdown)</p><br/>
       <span>
-        <a class="showcase-card-link" href="https://github.com/cpoonolly/task-graph">Website</a>
-        <a class="showcase-card-link" href="https://cpoonolly.github.io/task-graph">Github</a>
+        <a class="showcase-card-link" href="https://cpoonolly.github.io/task-graph">Website</a>
+        <a class="showcase-card-link" href="https://github.com/cpoonolly/task-graph">Github</a>
       </span>
     `
   }),
