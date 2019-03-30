@@ -11,26 +11,13 @@ function getRandomShadeOfRed() {
   return `hsl(0, 100%, ${getRandomInt(60, 90)}%)`;
 }
 
-function onScroll() {
-  let cherrySwarmEl = document.getElementById('cherry-bg-swarm');
-  let yMid = ($(window).height() / 2) + $(window).scrollTop();
-
-  cherrySwarmEl.animationProps = Object.assign({}, cherrySwarmEl.animationProps, {orbitY: yMid});
-}
-
-function initializeSwarm() {
+function swarmOrbitViewportCenter() {
   let cherrySwarmEl = document.getElementById('cherry-bg-swarm');
 
-  let colors = [];
-  for (let i = 0; i < 5; i++) {
-    colors.push(getRandomShadeOfRed());
-  }
-
-  let swarmRect = cherrySwarmEl.getBoundingClientRect();
-  let xMax = swarmRect.right;
-  let yMax = swarmRect.bottom;
+  let xMax = cherrySwarmEl.offsetWidth;
+  let yMax = cherrySwarmEl.offsetHeight;
   let xMid = $(window).width() / 2;
-  let yMid = $(window).height() / 2;
+  let yMid = ($(window).height() / 2) + $(window).scrollTop();
 
   cherrySwarmEl.animationProps = {
     name: 'orbit',
@@ -40,6 +27,15 @@ function initializeSwarm() {
     xMax: xMax,
     yMax: yMax
   };
+}
+
+function swarmSetColors() {
+  let cherrySwarmEl = document.getElementById('cherry-bg-swarm');
+
+  let colors = [];
+  for (let i = 0; i < 5; i++) {
+    colors.push(getRandomShadeOfRed());
+  }
 
   cherrySwarmEl.renderProps = {
     name: 'multi-colored-rect',
@@ -48,8 +44,18 @@ function initializeSwarm() {
   };
 }
 
+function initializeSwarm() {
+  swarmSetColors();
+  swarmOrbitViewportCenter();
+}
+
+function onScroll() {
+  swarmOrbitViewportCenter();
+}
+
 $(document).ready(() => {
   $('.modal').modal();
+  
   initializeSwarm();
   $(document).scroll(() => onScroll());
 });

@@ -7,13 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <style>
-    .info-page-container {
-      padding: 100px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    #info-page-container {
       position: relative;
+      min-height: calc(150vh);
     }
 
     #cherry-bg-swarm {
@@ -22,8 +18,58 @@
       height: 100%;
     }
 
+    #about-me-card {
+      margin-top: 50px;
+    }
+
     #cherry-profile-pic {
       max-width: 200px;
+    }
+
+    .card.experience-card {
+      height: 300px;
+    }
+
+    .card.card.experience-card .experience-card-activator {
+      cursor: pointer;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .card.experience-card .card-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .card.experience-card .card-content img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .project-card {
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    .project-card .card-image.project-card-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .project-card .card-image.project-card-img img {
+      width: 200px;
+    }
+
+    .project-card.project-see-more-card {
+      height: 300px;
     }
   </style>
 
@@ -42,30 +88,230 @@
 </head>
 
 <body>
-  <div class="info-page-container">
+  <div id="info-page-container">
     <cherry-swarm id="cherry-bg-swarm" particleCount="1000"></cherry-swarm>
-
-    <!-- About Me Card Start -->
-    <div class="about-me-card card grey lighten-5 animated slideInDown">
-      <div class="card-content">
-        <span class="card-title center-align">
-          <h3>About Me</h3>
-          <img id="cherry-profile-pic" src="./imgs/cherryProfilePic.jpg"
-            class="circle responsive-img cherry-profile-pic" />
-        </span>
-        <p class="center-align flow-text">
-          Hi! My name is Ryan Poonolly but everybody calls me Cherry.<br />
-          <a class="modal-trigger" href="#cherry-name-story">(Why Cherry? It's a long story...)</a>
-        </p>
-        <br />
-        <p class="center-align flow-text">
-          I'm a full stack engineer with 5 years of industry experience.
-        </p>
+    <!-- About Me Start -->
+    <div class="row">
+      <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l3">
+        <div id="about-me-card" class="card grey lighten-5 animated slideInDown">
+          <div class="card-content">
+            <span class="card-title center-align">
+              <h3>About Me</h3>
+              <img id="cherry-profile-pic" src="./imgs/cherryProfilePic.jpg" class="circle responsive-img cherry-profile-pic" />
+            </span>
+            <p class="center-align flow-text">
+              Hi! My name is Ryan Poonolly but everybody calls me Cherry.<br />
+              <a class="modal-trigger" href="#cherry-name-story">(Why Cherry? It's a long story...)</a>
+            </p>
+            <br />
+            <p class="center-align flow-text">
+              I'm a full stack engineer with 5 years of industry experience.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- About Me Card End -->
+    <!-- About Me End -->
 
-    <div style="width: 500px; height: 5000px"></div>
+    <!-- Experience Start -->
+    <div class="row">
+      <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l3">
+        <div class="card grey lighten-5 animated slideInLeft">
+          <div class="card-content">
+            <div class="card-title center-align">
+              <h4>Experience</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
+        <div class="card hoverable grey lighten-5 experience-card animated slideInLeft">
+          <span class="experience-card-activator waves-effect waves-light activator">&nbsp;</span>
+          <div class="card-content center-align">
+            <h5>Honest Buildings</h5>
+            <img alt="" src="./imgs/honestbuildings.jpeg">
+            <h6>Senior Software Engineer & Technical Lead</h6>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+            <p>
+              Honest Buildings is a asset management tool used by some of the largest owners in real estate (Vornado, Brookfield, SL Green).
+              <br/><br/>
+              I initially joined HB 3 years ago and got to watch the company grow from ~15 to >100 people. It was an incredibly valuable experience scaling the business & team up.
+              <br/><br/>
+              After devivering several high impact projects (our primary user dashboard, our permissions system, cost tracking, etc.)
+              I was eventually given the opportunity to lead a small squad of 4.
+              <br/><br/>
+              Together we delivered some key projects including capital planning & internationalization.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col s10 offset-s1 m4 l3">
+        <div class="card hoverable grey lighten-5 experience-card animated slideInRight">
+          <span class="experience-card-activator waves-effect waves-light activator">&nbsp;</span>
+          <div class="card-content center-align">
+            <h5>Goldman Sachs</h5>
+            <img alt="" src="./imgs/goldmansachs.png">
+            <h6>Technical Analyst</h6>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+            <p>
+              I joined Goldman Sachs after graduating college. I had previously worked there as a summer intern & was given an offer to return at the end of the summer.
+              <br/><br/>
+              At GS my team's role was to calculate firmwide exposure to counterparty default (answer the question if 'CompanyX' goes bankrupt how much money could we lose?).
+              <br/><br/>
+              We would then apply fees on GS traders for buying/selling securities with high firmwide exposure (Ex: if GS's owns a lot of debt from 'CompanyX' we wouldn't want to be buy 'CompanyX' stocks as that would further increase firmwide exposure)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
+        <div class="card hoverable grey lighten-5 experience-card animated slideInLeft">
+          <span class="experience-card-activator waves-effect waves-light activator">&nbsp;</span>
+          <div class="card-content center-align">
+            <h5>Internships</h5>
+            <img alt="" src="./imgs/internships.png">
+            <h6>&nbsp;</h6>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+            <p>
+              <strong>Summer 2012:</strong><br/>
+              Summer Technical Analyst at Goldman Sachs
+              <br/><br/>
+              <strong>Summer 2011:</strong><br/>
+              Applications Intern at Guardian Life Insurance.
+              <br/><br/>
+              <strong>Summer 2010:</strong><br/>
+              Operations Intern at APG Asset Managmenet.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col s10 offset-s1 m4 l3">
+        <div class="card hoverable grey lighten-5 experience-card animated slideInRight">
+          <span class="experience-card-activator waves-effect waves-light activator">&nbsp;</span>
+          <div class="card-content center-align">
+            <h5>Volunteer Experience</h5>
+            <img alt="" src="./imgs/volunteer.png">
+            <h6>&nbsp;</h6>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+            <p>
+              <strong>The Green Lion (Vietnam):</strong><br/>
+              Taught English at a local university, worked at a soup kitchen, & delivered food to hospital.
+              <br/><br/>
+              <strong>UBECI (Ecuador):</strong><br/>
+              Built simple maintable website the NGO & edited a video for a Christmas fundraising campaign.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Experience End -->
+
+    <!-- Projects Start -->
+    <div class="row">
+      <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l3">
+        <div class="card grey lighten-5 animated slideInRight">
+          <div class="card-content">
+            <div class="card-title center-align">
+              <h4>Projects</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
+        <div class="card hoverable grey lighten-5 project-card animated slideInLeft">
+          <div class="card-content center-align">
+            <h5>Pigeon RTC</h5>
+          </div>
+          <div class="card-image project-card-img">
+            <img alt="" src="./imgs/pigeon.svg">
+          </div>
+          <div class="card-content center-align">
+            <p>A pigeon based video chat Application!</p><br/>
+            <p>Build with: WebRTC, React, & Material-UI</p><br/>
+            <span>
+              <a class="project-card-link" href="https://cpoonolly.github.io/pigeon-rtc">Website</a>
+              <a class="project-card-link" href="https://github.com/cpoonolly/pigeon-rtc">Github</a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col s10 offset-s1 m4 l3">
+        <div class="card hoverable grey lighten-5 project-card animated slideInRight">
+          <div class="card-content center-align">
+            <h5>Pokerchip Counter</h5>
+          </div>
+          <div class="card-image project-card-img">
+            <img alt="" src="./imgs/pokerchip.png">
+          </div>
+          <div class="card-content center-align">
+            <p>A Android app for tracking pokerchips in a poker game</p><br/>
+            <p>Build with: React Native</p><br/>
+            <span>
+              <a class="project-card-link" href="https://expo.io/@cpoonolly/PokerChipCounter">Expo</a>
+              <a class="project-card-link" href="https://cpoonolly.github.io/pokerchipcounter">Github</a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
+        <div class="card hoverable grey lighten-5 project-card animated slideInLeft">
+          <div class="card-content center-align">
+            <h5>NYC DOB Permit ETL</h5>
+          </div>
+          <div class="card-image project-card-img">
+            <img alt="" src="./imgs/nycdob.png">
+          </div>
+          <div class="card-content center-align">
+            <p>A ETL pipeline for scraping permits from the NYC department of buildings website and uploading to a Redshift database</p><br/>
+            <p>Build with: AWS Lambda, Java, Jsoup, & Redshift</p><br/>
+            <span>
+              <a class="project-card-link" href="https://github.com/cpoonolly/nyc_dob_etl">Github</a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col s10 offset-s1 m4 l3">
+        <div class="card hoverable grey lighten-5 project-card animated slideInRight">
+          <div class="card-content center-align">
+            <h5>Task Graph</h5>
+          </div>
+          <div class="card-image project-card-img">
+            <img alt="" src="./imgs/taskgraph.svg">
+          </div>
+          <div class="card-content center-align">
+            <p>A simple app for creating & organizing tasks & subtasks.</p><br/>
+            <p>Build with: Angular2, Angular Material, & ngx-md (for displaying markdown)</p><br/>
+            <span>
+              <a class="project-card-link" href="https://cpoonolly.github.io/task-graph">Website</a>
+              <a class="project-card-link" href="https://github.com/cpoonolly/task-graph">Github</a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col s10 offset-s1 m4 offset-m4 l4 offset-l4">
+        <div class="card hoverable grey lighten-5 project-card project-see-more-card seeanimated slideInUp">
+          <div class="card-image project-card-img">
+            <img alt="" src="./imgs/github.png">
+          </div>
+          <div class="card-content center-align">
+              <a class="showcase-card-link" href="https://github.com/cpoonolly/">See more on Github!</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Projects End -->
+
+    <!-- <div style="width: calc(100vw); height: 5000px"></div> -->
   </div>
 
   <!-- Cherry Name Story Modal Start -->
