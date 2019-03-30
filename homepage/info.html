@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <style>
+    .info-page-container {
+      padding: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    #cherry-bg-swarm {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    #cherry-profile-pic {
+      max-width: 200px;
+    }
+  </style>
+
+  <!-- TODO - Move these to webpack -->
+  <!-- Jquery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+  <!-- Materialize Compiled and minified CSS/JavaScript -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+  <title>Cherry's Homepage</title>
+</head>
+
+<body>
+  <div class="info-page-container">
+    <cherry-swarm id="cherry-bg-swarm" particleCount="1000"></cherry-swarm>
+
+    <!-- About Me Card Start -->
+    <div class="about-me-card card grey lighten-5 animated slideInDown">
+      <div class="card-content">
+        <span class="card-title center-align">
+          <h3>About Me</h3>
+          <img id="cherry-profile-pic" src="./imgs/cherryProfilePic.jpg"
+            class="circle responsive-img cherry-profile-pic" />
+        </span>
+        <p class="center-align flow-text">
+          Hi! My name is Ryan Poonolly but everybody calls me Cherry.<br />
+          <a class="modal-trigger" href="#cherry-name-story">(Why Cherry? It's a long story...)</a>
+        </p>
+        <br />
+        <p class="center-align flow-text">
+          I'm a full stack engineer with 5 years of industry experience.
+        </p>
+      </div>
+    </div>
+    <!-- About Me Card End -->
+
+    <div style="width: 500px; height: 5000px"></div>
+  </div>
+
+  <!-- Cherry Name Story Modal Start -->
+  <div id="cherry-name-story" class="modal">
+    <div class="modal-content">
+      <p class="flow-text">
+        I was born in Kerala, India with the name Cherry. Cherry was a pretty common name in Kerala
+        & I was actually named after my grandfather (his name was Cherian).
+        <br /><br />
+        Unfortunately when my family moved to the US, my parents quickly realized that they had named their son after a
+        fruit...
+        So in an attempt to spare me a life of ridicule, they renamed me to Ryan. ('Ryan' comes from the 'rian' in
+        'Cherian')
+        <br /><br />
+        Unfortunately, despite their efforts, I found plenty of other ways to ridicule myself over the years
+        (I had a particularly embarrasing hairdo throughout highschool/college).
+        So ultimately I resolved to just stick with Cherry.
+        <br /><br />
+        The end result? I'm officially Ryan on paper, but everyone just calls me Cherry!
+        <br /><br />
+        ..which is good, I prefer Cherry :)
+      </p>
+    </div>
+  </div>
+  <!-- Cherry Name Story Modal End -->
+</body>
+
+</html>

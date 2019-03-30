@@ -22,6 +22,8 @@ function generateSwarmAnimator(animationProps) {
       return new FreezeSwarmAnimator(animationProps);
     case 'sequence':
       return new SequencedSwarmAnimator(animationProps);
+    case 'release':
+      return new ReleaseSwarmAnimator(animationProps);
     case 'custom':
       return new CustomSwarmAnimator(animationProps);
     default:
@@ -93,23 +95,16 @@ class OrbitPointSwarmAnimator extends SwarmAnimator {
   }
 }
 
-class RepelPointSwarmAnimator extends SwarmAnimator {
-  static validateParams(repelX, repelY) {
-    if (repelX === undefined || repelX === null) throw Error('invalid orbit animation - repelX is null/undefined');
-    if (repelY === undefined || repelY === null) throw Error('invalid orbit animation - repelY is null/undefined');
-  }
-
-  constructor({repelX, repelY}) {
+class ReleaseSwarmAnimator extends SwarmAnimator {
+  constructor() {
     super();
-
-    RepelPointSwarmAnimator.validateParams(repelX, repelY);
-
-    this.repelX = repelX;
-    this.repelY = repelY;
   }
 
-  animate(swarm, dt, currentTime) {
-    throw new Error('this should be overridden...');
+  animate(swarm, dt) {
+    swarm.particles.forEach((particle) => {
+      particle.x += dt * particle.dx / 1000;
+      particle.y += dt * particle.dy / 1000;
+    });
   }
 
   onCanvasResize() {
@@ -256,6 +251,6 @@ export {
   FreezeSwarmAnimator,
   SequencedSwarmAnimator,
   CustomSwarmAnimator,
-  RepelPointSwarmAnimator,
+  ReleaseSwarmAnimator,
   generateSwarmAnimator,
 }
