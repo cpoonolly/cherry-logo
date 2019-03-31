@@ -11,8 +11,6 @@ class SwarmAnimator {
 }
 
 function generateSwarmAnimator(animationProps) {
-  console.log('hello world');
-  console.log(`generating animation: ${JSON.stringify(animationProps)}`);
   switch (animationProps.name) {
     case 'orbit':
       return new OrbitPointSwarmAnimator(animationProps);
@@ -22,6 +20,8 @@ function generateSwarmAnimator(animationProps) {
       return new FreezeSwarmAnimator(animationProps);
     case 'sequence':
       return new SequencedSwarmAnimator(animationProps);
+    case 'release':
+      return new ReleaseSwarmAnimator(animationProps);
     case 'custom':
       return new CustomSwarmAnimator(animationProps);
     default:
@@ -89,27 +89,19 @@ class OrbitPointSwarmAnimator extends SwarmAnimator {
     this.yMax = newHeight;
     this.orbitX = newWidth * (this.orbitX / oldWidth);
     this.orbitY = newHeight * (this.orbitY / oldHeight);
-    console.log(`orbit animation - handling canvas resize: {orbitX: ${this.orbitX}, orbitY: ${this.orbitY}}`);
   }
 }
 
-class RepelPointSwarmAnimator extends SwarmAnimator {
-  static validateParams(repelX, repelY) {
-    if (repelX === undefined || repelX === null) throw Error('invalid orbit animation - repelX is null/undefined');
-    if (repelY === undefined || repelY === null) throw Error('invalid orbit animation - repelY is null/undefined');
-  }
-
-  constructor({repelX, repelY}) {
+class ReleaseSwarmAnimator extends SwarmAnimator {
+  constructor() {
     super();
-
-    RepelPointSwarmAnimator.validateParams(repelX, repelY);
-
-    this.repelX = repelX;
-    this.repelY = repelY;
   }
 
-  animate(swarm, dt, currentTime) {
-    throw new Error('this should be overridden...');
+  animate(swarm, dt) {
+    swarm.particles.forEach((particle) => {
+      particle.x += dt * particle.dx / 1000;
+      particle.y += dt * particle.dy / 1000;
+    });
   }
 
   onCanvasResize() {
@@ -159,7 +151,6 @@ class RandomMotionSwarmAnimator extends SwarmAnimator {
   onCanvasResize(oldWidth, oldHeight, newWidth, newHeight) {
     this.xMax = newWidth;
     this.yMax = newHeight;
-    console.log(`random animation - handling canvas resize: {orbitX: ${this.orbitX}, orbitY: ${this.orbitY}}`);
   }
 }
 
@@ -256,6 +247,6 @@ export {
   FreezeSwarmAnimator,
   SequencedSwarmAnimator,
   CustomSwarmAnimator,
-  RepelPointSwarmAnimator,
+  ReleaseSwarmAnimator,
   generateSwarmAnimator,
 }

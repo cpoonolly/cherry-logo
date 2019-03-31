@@ -2,13 +2,27 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const PROD_CONFIG = {
-  entry: './index.js',
+  entry: {
+    index: './index.js',
+    info: './info.js',
+  },
   output: {
-    filename: 'main.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
-    new HtmlWebpackPlugin({filename: 'index.html', template: 'index.html', favicon: './imgs/favicon.ico'})
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      chunks: ['index'],
+      favicon: './imgs/favicon.ico'}
+    ),
+    new HtmlWebpackPlugin({
+      filename: 'info.html',
+      template: 'info.html',
+      chunks: ['info'],
+      favicon: './imgs/favicon.ico'
+    })
   ],
   module:{
     rules:[{
