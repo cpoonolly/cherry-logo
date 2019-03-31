@@ -57,7 +57,6 @@ class CusotmSwarmRenderer extends SwarmRenderer {
 }
 
 function generateSwarmRenderer(renderProps) {
-  console.log(`generating renderer: ${JSON.stringify(renderProps)}`);
   switch (renderProps.name) {
     case 'single-colored-rect':
         return new SingleColoredSquareRenderer(renderProps);

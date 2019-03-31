@@ -11,8 +11,6 @@ class SwarmAnimator {
 }
 
 function generateSwarmAnimator(animationProps) {
-  console.log('hello world');
-  console.log(`generating animation: ${JSON.stringify(animationProps)}`);
   switch (animationProps.name) {
     case 'orbit':
       return new OrbitPointSwarmAnimator(animationProps);
@@ -91,7 +89,6 @@ class OrbitPointSwarmAnimator extends SwarmAnimator {
     this.yMax = newHeight;
     this.orbitX = newWidth * (this.orbitX / oldWidth);
     this.orbitY = newHeight * (this.orbitY / oldHeight);
-    console.log(`orbit animation - handling canvas resize: {orbitX: ${this.orbitX}, orbitY: ${this.orbitY}}`);
   }
 }
 
@@ -154,7 +151,6 @@ class RandomMotionSwarmAnimator extends SwarmAnimator {
   onCanvasResize(oldWidth, oldHeight, newWidth, newHeight) {
     this.xMax = newWidth;
     this.yMax = newHeight;
-    console.log(`random animation - handling canvas resize: {orbitX: ${this.orbitX}, orbitY: ${this.orbitY}}`);
   }
 }
 
