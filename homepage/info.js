@@ -40,7 +40,7 @@ function swarmSetColors() {
   cherrySwarmEl.renderProps = {
     name: 'multi-colored-rect',
     colors: colors,
-    size: 5,
+    size: 10,
   };
 }
 
