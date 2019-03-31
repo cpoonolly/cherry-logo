@@ -71,6 +71,10 @@
     .project-card.project-see-more-card {
       height: 300px;
     }
+
+    *[data-scroll-animation]:not(.animated) {
+      visibility: hidden;
+    }
   </style>
 
   <!-- TODO - Move these to webpack -->
@@ -93,7 +97,7 @@
     <!-- About Me Start -->
     <div class="row">
       <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l3">
-        <div id="about-me-card" class="card grey lighten-5 animated slideInDown">
+        <div id="about-me-card" class="card grey lighten-5" data-scroll-animation="slideInDown">
           <div class="card-content">
             <span class="card-title center-align">
               <h3>About Me</h3>
@@ -116,7 +120,7 @@
     <!-- Experience Start -->
     <div class="row">
       <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l3">
-        <div class="card grey lighten-5 animated slideInLeft">
+        <div class="card grey lighten-5" data-scroll-animation="slideInLeft">
           <div class="card-content">
             <div class="card-title center-align">
               <h4>Experience</h4>
@@ -126,7 +130,7 @@
       </div>
 
       <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
-        <div class="card hoverable grey lighten-5 experience-card animated slideInLeft">
+        <div class="card hoverable grey lighten-5 experience-card" data-scroll-animation="slideInLeft">
           <span class="experience-card-activator waves-effect waves-light activator">&nbsp;</span>
           <div class="card-content center-align">
             <h5>Honest Buildings</h5>
@@ -149,7 +153,7 @@
         </div>
       </div>
       <div class="col s10 offset-s1 m4 l3">
-        <div class="card hoverable grey lighten-5 experience-card animated slideInRight">
+        <div class="card hoverable grey lighten-5 experience-card" data-scroll-animation="slideInRight">
           <span class="experience-card-activator waves-effect waves-light activator">&nbsp;</span>
           <div class="card-content center-align">
             <h5>Goldman Sachs</h5>
@@ -169,7 +173,7 @@
         </div>
       </div>
       <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
-        <div class="card hoverable grey lighten-5 experience-card animated slideInLeft">
+        <div class="card hoverable grey lighten-5 experience-card" data-scroll-animation="slideInLeft">
           <span class="experience-card-activator waves-effect waves-light activator">&nbsp;</span>
           <div class="card-content center-align">
             <h5>Internships</h5>
@@ -192,7 +196,7 @@
         </div>
       </div>
       <div class="col s10 offset-s1 m4 l3">
-        <div class="card hoverable grey lighten-5 experience-card animated slideInRight">
+        <div class="card hoverable grey lighten-5 experience-card" data-scroll-animation="slideInRight">
           <span class="experience-card-activator waves-effect waves-light activator">&nbsp;</span>
           <div class="card-content center-align">
             <h5>Volunteer Experience</h5>
@@ -217,7 +221,7 @@
     <!-- Projects Start -->
     <div class="row">
       <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l3">
-        <div class="card grey lighten-5 animated slideInRight">
+        <div class="card grey lighten-5" data-scroll-animation="slideInRight">
           <div class="card-content">
             <div class="card-title center-align">
               <h4>Projects</h4>
@@ -227,7 +231,7 @@
       </div>
 
       <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
-        <div class="card hoverable grey lighten-5 project-card animated slideInLeft">
+        <div class="card hoverable grey lighten-5 project-card" data-scroll-animation="slideInLeft">
           <div class="card-content center-align">
             <h5>Pigeon RTC</h5>
           </div>
@@ -245,7 +249,7 @@
         </div>
       </div>
       <div class="col s10 offset-s1 m4 l3">
-        <div class="card hoverable grey lighten-5 project-card animated slideInRight">
+        <div class="card hoverable grey lighten-5 project-card" data-scroll-animation="slideInRight">
           <div class="card-content center-align">
             <h5>Pokerchip Counter</h5>
           </div>
@@ -263,7 +267,7 @@
         </div>
       </div>
       <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
-        <div class="card hoverable grey lighten-5 project-card animated slideInLeft">
+        <div class="card hoverable grey lighten-5 project-card" data-scroll-animation="slideInLeft">
           <div class="card-content center-align">
             <h5>NYC DOB Permit ETL</h5>
           </div>
@@ -280,7 +284,7 @@
         </div>
       </div>
       <div class="col s10 offset-s1 m4 l3">
-        <div class="card hoverable grey lighten-5 project-card animated slideInRight">
+        <div class="card hoverable grey lighten-5 project-card" data-scroll-animation="slideInRight">
           <div class="card-content center-align">
             <h5>Task Graph</h5>
           </div>
@@ -298,7 +302,7 @@
         </div>
       </div>
       <div class="col s10 offset-s1 m4 offset-m4 l4 offset-l4">
-        <div class="card hoverable grey lighten-5 project-card project-see-more-card seeanimated slideInUp">
+        <div class="card hoverable grey lighten-5 project-card project-see-more-card" data-scroll-animation="slideInUp">
           <div class="card-image project-card-img">
             <img alt="" src="./imgs/github.png">
           </div>

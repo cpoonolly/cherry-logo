@@ -44,6 +44,18 @@ function swarmSetColors() {
   };
 }
 
+function updateScrollAnimations() {
+  $('*[data-scroll-animation]:not(.animated)').each((index, el) => {
+    let jqueryEl = $(el);
+
+    if (jqueryEl.offset().top < $(window).scrollTop() + $(window).height()) {
+      console.log('animating element');
+      jqueryEl.addClass('animated');
+      jqueryEl.addClass(jqueryEl.attr('data-scroll-animation'));
+    }
+  });
+}
+
 function initializeSwarm() {
   swarmSetColors();
   swarmOrbitViewportCenter();
@@ -51,11 +63,13 @@ function initializeSwarm() {
 
 function onScroll() {
   swarmOrbitViewportCenter();
+  updateScrollAnimations();
 }
 
 $(document).ready(() => {
   $('.modal').modal();
   
   initializeSwarm();
+  updateScrollAnimations();
   $(document).scroll(() => onScroll());
 });
