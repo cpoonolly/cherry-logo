@@ -68,6 +68,10 @@
       width: 200px;
     }
 
+    .project-card .project-card-link {
+      margin: 0 5px;
+    }
+
     .project-card.project-see-more-card {
       height: 300px;
     }
@@ -92,8 +96,11 @@
 </head>
 
 <body>
+  <!-- Page Content Start -->
   <div id="info-page-container">
+
     <cherry-swarm id="cherry-bg-swarm" particleCount="1000"></cherry-swarm>
+
     <!-- About Me Start -->
     <div class="row">
       <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l3">
@@ -105,7 +112,7 @@
             </span>
             <p class="center-align flow-text">
               Hi! My name is Ryan Poonolly but everybody calls me Cherry.<br />
-              <a class="modal-trigger" href="#cherry-name-story">(Why Cherry? It's a long story...)</a>
+              <a class="modal-trigger" href="#cherry-name-story">(Why Cherry? ...it's a long story)</a>
             </p>
             <br />
             <p class="center-align flow-text">
@@ -129,92 +136,54 @@
         </div>
       </div>
 
+      <!-- honest buildings -->
       <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
         <div class="card hoverable grey lighten-5 experience-card" data-scroll-animation="slideInLeft">
-          <span class="experience-card-activator waves-effect waves-light activator">&nbsp;</span>
+          <span class="experience-card-activator waves-effect waves-light modal-trigger" href="#experience-honest-buildings-modal">&nbsp;</span>
           <div class="card-content center-align">
             <h5>Honest Buildings</h5>
             <img alt="" src="./imgs/honestbuildings.jpeg">
             <h6>Senior Software Engineer & Technical Lead</h6>
           </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
-            <p>
-              Honest Buildings is a asset management tool used by some of the largest owners in real estate (Vornado, Brookfield, SL Green).
-              <br/><br/>
-              I initially joined HB 3 years ago and got to watch the company grow from ~15 to >100 people. It was an incredibly valuable experience scaling the business & team up.
-              <br/><br/>
-              After devivering several high impact projects (our primary user dashboard, our permissions system, cost tracking, etc.)
-              I was eventually given the opportunity to lead a small squad of 4.
-              <br/><br/>
-              Together we delivered some key projects including capital planning & internationalization.
-            </p>
-          </div>
         </div>
       </div>
+
+      <!-- goldman -->
       <div class="col s10 offset-s1 m4 l3">
         <div class="card hoverable grey lighten-5 experience-card" data-scroll-animation="slideInRight">
-          <span class="experience-card-activator waves-effect waves-light activator">&nbsp;</span>
+          <span class="experience-card-activator waves-effect waves-light modal-trigger" href="#experience-goldman-modal">&nbsp;</span>
           <div class="card-content center-align">
             <h5>Goldman Sachs</h5>
             <img alt="" src="./imgs/goldmansachs.png">
             <h6>Technical Analyst</h6>
           </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
-            <p>
-              I joined Goldman Sachs after graduating college. I had previously worked there as a summer intern & was given an offer to return at the end of the summer.
-              <br/><br/>
-              At GS my team's role was to calculate firmwide exposure to counterparty default (answer the question if 'CompanyX' goes bankrupt how much money could we lose?).
-              <br/><br/>
-              We would then apply fees on GS traders for buying/selling securities with high firmwide exposure (Ex: if GS's owns a lot of debt from 'CompanyX' we wouldn't want to be buy 'CompanyX' stocks as that would further increase firmwide exposure)
-            </p>
-          </div>
         </div>
       </div>
+
+      <!-- internships -->
       <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
         <div class="card hoverable grey lighten-5 experience-card" data-scroll-animation="slideInLeft">
-          <span class="experience-card-activator waves-effect waves-light activator">&nbsp;</span>
+          <span class="experience-card-activator waves-effect waves-light modal-trigger" href="#experience-internships-modal">&nbsp;</span>
           <div class="card-content center-align">
             <h5>Internships</h5>
             <img alt="" src="./imgs/internships.png">
             <h6>&nbsp;</h6>
           </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
-            <p>
-              <strong>Summer 2012:</strong><br/>
-              Summer Technical Analyst at Goldman Sachs
-              <br/><br/>
-              <strong>Summer 2011:</strong><br/>
-              Applications Intern at Guardian Life Insurance.
-              <br/><br/>
-              <strong>Summer 2010:</strong><br/>
-              Operations Intern at APG Asset Managmenet.
-            </p>
-          </div>
         </div>
       </div>
+
+      <!-- volunteer -->
       <div class="col s10 offset-s1 m4 l3">
         <div class="card hoverable grey lighten-5 experience-card" data-scroll-animation="slideInRight">
-          <span class="experience-card-activator waves-effect waves-light activator">&nbsp;</span>
+          <span class="experience-card-activator waves-effect waves-light modal-trigger" href="#experience-volunteer-modal">&nbsp;</span>
           <div class="card-content center-align">
             <h5>Volunteer Experience</h5>
             <img alt="" src="./imgs/volunteer.png">
             <h6>&nbsp;</h6>
           </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
-            <p>
-              <strong>The Green Lion (Vietnam):</strong><br/>
-              Taught English at a local university, worked at a soup kitchen, & delivered food to hospital.
-              <br/><br/>
-              <strong>UBECI (Ecuador):</strong><br/>
-              Built simple maintable website the NGO & edited a video for a Christmas fundraising campaign.
-            </p>
-          </div>
         </div>
       </div>
+
     </div>
     <!-- Experience End -->
 
@@ -230,8 +199,9 @@
         </div>
       </div>
 
+      <!-- pigeon rtc -->
       <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
-        <div class="card hoverable grey lighten-5 project-card" data-scroll-animation="slideInLeft">
+        <div class="card grey lighten-5 project-card" data-scroll-animation="slideInLeft">
           <div class="card-content center-align">
             <h5>Pigeon RTC</h5>
           </div>
@@ -248,8 +218,10 @@
           </div>
         </div>
       </div>
+
+      <!-- poker chip counter -->
       <div class="col s10 offset-s1 m4 l3">
-        <div class="card hoverable grey lighten-5 project-card" data-scroll-animation="slideInRight">
+        <div class="card grey lighten-5 project-card" data-scroll-animation="slideInRight">
           <div class="card-content center-align">
             <h5>Pokerchip Counter</h5>
           </div>
@@ -266,8 +238,10 @@
           </div>
         </div>
       </div>
+
+      <!-- nyc dob etl -->
       <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
-        <div class="card hoverable grey lighten-5 project-card" data-scroll-animation="slideInLeft">
+        <div class="card grey lighten-5 project-card" data-scroll-animation="slideInLeft">
           <div class="card-content center-align">
             <h5>NYC DOB Permit ETL</h5>
           </div>
@@ -283,8 +257,10 @@
           </div>
         </div>
       </div>
+
+      <!-- task graph -->
       <div class="col s10 offset-s1 m4 l3">
-        <div class="card hoverable grey lighten-5 project-card" data-scroll-animation="slideInRight">
+        <div class="card grey lighten-5 project-card" data-scroll-animation="slideInRight">
           <div class="card-content center-align">
             <h5>Task Graph</h5>
           </div>
@@ -301,13 +277,15 @@
           </div>
         </div>
       </div>
+
+      <!-- github -->
       <div class="col s10 offset-s1 m4 offset-m4 l4 offset-l4">
-        <div class="card hoverable grey lighten-5 project-card project-see-more-card" data-scroll-animation="slideInUp">
+        <div class="card grey lighten-5 project-card project-see-more-card" data-scroll-animation="slideInUp">
           <div class="card-image project-card-img">
             <img alt="" src="./imgs/github.png">
           </div>
           <div class="card-content center-align">
-              <a class="showcase-card-link" href="https://github.com/cpoonolly/">See more on Github!</a>
+              <a class="project-card-link" href="https://github.com/cpoonolly/">See more on Github!</a>
           </div>
         </div>
       </div>
@@ -315,8 +293,8 @@
     </div>
     <!-- Projects End -->
 
-    <!-- <div style="width: calc(100vw); height: 5000px"></div> -->
   </div>
+  <!-- Page Content End -->
 
   <!-- Cherry Name Story Modal Start -->
   <div id="cherry-name-story" class="modal">
@@ -341,6 +319,79 @@
     </div>
   </div>
   <!-- Cherry Name Story Modal End -->
+
+  <!-- Experience HB Modal Start -->
+  <div id="experience-honest-buildings-modal" class="modal">
+    <div class="modal-content">
+      <p class="flow-text">
+        Honest Buildings is a asset management platform used by some of the largest owners in real estate in the industry.
+        Our clients included companies such Vornado Reality Trust, Brookfield, SL Green Reality, Beacon Capital Partners, etc.
+        <br/><br/>
+        I initially joined HB 3 years ago and had the chance to watch the company grow from ~15 to >100 people.
+        It was an incredibly valuable experience scaling the business & team up.
+        <br/><br/>
+        After devivering several high impact projects including our primary user dashboard, our permissions system, cost tracking, invoicing, etc.
+        I was eventually given the opportunity to lead a small squad of 4.
+        <br/><br/>
+        Working closely with clients, our team was able to build some very cool features including a new capital planning tool
+        and the infrastructure for multi-language/multi-currency support (localization).
+      </p>
+    </div>
+  </div>
+  <!-- Experience HB Modal End -->
+
+  <!-- Experience GS Modal Start -->
+  <div id="experience-goldman-modal" class="modal">
+    <div class="modal-content">
+      <p class="flow-text">
+        I joined Goldman Sachs after graduating college. I had previously worked there as a summer intern &amp; was given a return offer at the end of the summer.
+        <br/><br/>
+        At GS my team's role was to calculate firmwide exposure to counterparty default.
+        <br/>
+        Basically it was our job answer the question "if 'CompanyX' goes bankrupt how much money could the firm lose?".
+        <br/><br/>
+        After calculating this exposure, we would then charge fees to GS trading desks for taking positions that increase this exposure.
+        <br/><br/>
+        So if GS owns a lot of debt from 'CompanyX' we would charge GS Traders for buying equity from 'CompanyX' as well because if
+        'CompanyX' goes bankrupt the firm would lose a lot of money.
+      </p>
+    </div>
+  </div>
+  <!-- Experience GS Modal End -->
+
+  <!-- Experience Internships Modal Start -->
+  <div id="experience-internships-modal" class="modal">
+    <div class="modal-content">
+      <p class="flow-text">
+        <strong>Summer 2012:&nbsp;</strong>Summer Technical Analyst at Goldman Sachs<br/>
+        Worked on an application used to consolidate legal aggreement terms across different trading desks.
+        <br/><br/>
+        <strong>Summer 2011:&nbsp;</strong>Applications Intern at Guardian Life Insurance.<br/>
+        Helped develop a website for insurance agents to create &amp; manage insurance policies.
+        <br/><br/>
+        <strong>Summer 2010:&nbsp;</strong>Operations Intern at APG Asset Managmenet.<br/>
+        Documented data management processes for auditors & trainees.
+      </p>
+    </div>
+  </div>
+  <!-- Experience Internships Modal End -->
+
+  <!-- Volunteer Modal Start -->
+  <div id="experience-volunteer-modal" class="modal">
+    <div class="modal-content">
+      <p class="flow-text">
+        <strong>Summer 2012:&nbsp;</strong>Summer Technical Analyst at Goldman Sachs<br/>
+        Worked on an application used to consolidate legal aggreement terms across different trading desks.
+        <br/><br/>
+        <strong>Summer 2011:&nbsp;</strong>Applications Intern at Guardian Life Insurance.<br/>
+        Helped develop a website for insurance agents to create &amp; manage insurance policies.
+        <br/><br/>
+        <strong>Summer 2010:&nbsp;</strong>Operations Intern at APG Asset Managmenet.<br/>
+        Documented data management processes for auditors & trainees.
+      </p>
+    </div>
+  </div>
+  <!-- Volunteer Modal End -->
 </body>
 
 </html>
