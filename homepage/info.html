@@ -83,6 +83,17 @@
     *[data-scroll-animation]:not(.animated) {
       visibility: hidden;
     }
+
+    .sub-text {
+      font-size: 10px;
+      visibility: hidden;
+    }
+
+    @media (hover: none) {
+      .sub-text {
+        visibility: visible;
+      }
+    }
   </style>
 
   <!-- TODO - Move these to webpack -->
@@ -116,7 +127,7 @@
             </span>
             <p class="center-align flow-text">
               Hi! My name is Ryan Poonolly but everybody calls me Cherry.<br />
-              <a class="modal-trigger" href="#cherry-name-story">(Why Cherry? ...it's a long story)</a>
+              <a class="modal-trigger" href="#cherry-name-story">(Why Cherry? ...well it's a long story)</a>
             </p>
             <br />
             <p class="center-align flow-text">
@@ -133,6 +144,7 @@
       <div class="col s10 offset-s1 m4 offset-m4">
         <div class="title-card-panel card-panel grey lighten-5 center-align" data-scroll-animation="slideInLeft">
           <h4>Experience</h4>
+          <span class="sub-text">Click below to see more!</span>
         </div>
       </div>
 
@@ -160,25 +172,26 @@
         </div>
       </div>
 
-      <!-- internships -->
+      <!-- volunteer -->
       <div class="col s10 offset-s1 m4 offset-m2 l3 offset-l3">
         <div class="card hoverable grey lighten-5 experience-card" data-scroll-animation="slideInLeft">
-          <span class="experience-card-activator waves-effect waves-light modal-trigger" href="#experience-internships-modal">&nbsp;</span>
+          <span class="experience-card-activator waves-effect waves-light modal-trigger" href="#experience-volunteer-modal">&nbsp;</span>
           <div class="card-content center-align">
-            <h5>Internships</h5>
-            <img alt="" src="./imgs/internships.png">
+            <h5>Volunteer Experience</h5>
+            <img alt="" src="./imgs/volunteer.png">
             <h6>&nbsp;</h6>
           </div>
         </div>
       </div>
 
-      <!-- volunteer -->
+      <!-- internships -->
+      
       <div class="col s10 offset-s1 m4 l3">
         <div class="card hoverable grey lighten-5 experience-card" data-scroll-animation="slideInRight">
-          <span class="experience-card-activator waves-effect waves-light modal-trigger" href="#experience-volunteer-modal">&nbsp;</span>
+          <span class="experience-card-activator waves-effect waves-light modal-trigger" href="#experience-internships-modal">&nbsp;</span>
           <div class="card-content center-align">
-            <h5>Volunteer Experience</h5>
-            <img alt="" src="./imgs/volunteer.png">
+            <h5>Internships</h5>
+            <img alt="" src="./imgs/internships.png">
             <h6>&nbsp;</h6>
           </div>
         </div>
@@ -300,12 +313,12 @@
         I was born in Kerala, India with the name Cherry. Cherry was a pretty common name in Kerala
         &amp; I was actually named after my grandfather (his name was Cherian).
         <br/><br />
-        Unfortunately when my family moved to the US, my parents quickly realized that they had inadvertantly named their son after a fruit...
+        Unfortunately when my family moved to the US, my parents quickly realized that they had inadvertantly named their son a fruit...
         So, in an attempt to spare me a life of ridicule, they renamed me to Ryan. ('Ryan' comes from the 'rian' in 'Cherian')
         <br/><br />
-        Despite their efforts, I would find plenty of other ways to subject myself to ridicule over the years
-        (ex: my hairstyle choice in high school/college definitely didn't help the situation).
-        So ultimately I resolved to just stick with Cherry.
+        Despite their efforts, I would ultimately find plenty of other ways to ridicule myself over the years
+        (my hairstyle choice in high school/college definitely didn't help the situation 😅).
+        So I resolved to just stick with Cherry.
         <br /><br />
         The end result? I'm officially Ryan on paper, but everyone calls me Cherry!
         <br /><br />
@@ -322,7 +335,7 @@
         <img alt="" src="imgs/honestbuildings.jpeg" style="width: 100px">
       </div>
       <p class="flow-text">
-        Honest Buildings is a asset management platform used by some of the largest owners in real estate in the industry.
+        Honest Buildings is a asset management platform used by some of the largest real estate owners in the industry.
         Our clients included companies such Vornado Reality Trust, Brookfield, SL Green Reality, Beacon Capital Partners, etc.
       </p>
       <div class="container center-align">
@@ -331,14 +344,14 @@
       <p class="flow-text">
         I initially joined HB 3 years ago and had the chance to watch the company grow from ~15 to over 100 people.
         Being apart of HB during this period of growth was an incredibly valuable experience.
-        I learned a lot about how to scale up a business & a team.
+        I learned a lot about how to scale both a business & a team up.
       </p>
       <div class="container center-align">
         <img alt="" src="imgs/cherry_at_hb2.jpg" style="width: 50%">
       </div>
       <p class="flow-text">
         After delivering several high impact projects including our primary user dashboard, our permissions system, cost tracking, invoicing, etc.
-        I was eventually given the opportunity to lead a small squad of 4.
+        I was given the opportunity to lead a small squad of 4.
         <br/><br/>
         Working closely with clients, our team was able to build some very cool features including a new capital planning tool
         and the infrastructure for multi-language support (internationalization).
@@ -362,6 +375,8 @@
         <br/><br/>
         Different GS trading desks would then be charged a fee based on how much counterparty risk they carry
         &amp; the money from this fee would be used to hedge their positions.
+        <br/><br/>
+        My role at GS was to support the processes that ran these calculations &amp; support the traders hedging against this form of risk.
       </p>
     </div>
   </div>
@@ -406,14 +421,15 @@
       </div>
       <p class="flow-text">
         <strong>The Green Lion (Vietnam):</strong><br/>
-        Taught English at a local university, worked at a soup kitchen, & delivered food to hospital.
+        Taught English at a local university, worked at a soup kitchen, & delivered food to a hospital.
       </p>
       <div class="container center-align">
         <img alt="" src="imgs/cherry_at_ubeci.jpg" style="width: 60%">
       </div>
       <p class="flow-text">
         <strong>UBECI (Ecuador):</strong><br/>
-        Built simple maintable website the NGO & edited a video for a Christmas fundraising campaign.
+        Built simple maintable website for UBECI, video edited a Christmas fundraising campaign, 
+        &amp; helped run a very basic classroom for children living in Ecuadorian street markets.
       </p>
     </div>
   </div>
