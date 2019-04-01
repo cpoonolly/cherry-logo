@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <style>
+        .cherry-homepage-container {
+            position: relative;
+        }
+
+        .cherry-buttons {
+            position: absolute;
+            width: calc(100vw);
+            height: 200px;
+            max-height: calc(15vh);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+        }
+
+        .cherry-button {
+            margin: 0px 10px;
+        }
+
+        .cherry-brackets-container {
+            position: absolute;
+            width: calc(100vw);
+            height: calc(100vh);
+            min-height: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .cherry-swarm-container {
+            position: absolute;
+            width: calc(100vw);
+            height: calc(100vh);
+            min-height: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .cherry-swarm-container cherry-swarm {
+            width: 100%;
+            height: 100%;
+        }
+
+        .cherry-slot {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            color: hsl(0, 100%, 20%);
+        }
+
+        .cherry-slot-logo {
+            max-width: 300px;
+        }
+
+        img.cherry-profile-pic.responsive-img {
+            max-width: 200px;
+        }
+
+        #cherry-projects .showcase-card {
+          padding: 20px;
+          max-width: 300px;
+        }
+
+        #cherry-projects .showcase-card-img {
+          min-width: 200px;
+        }
+
+        #cherry-projects .showcase-card-link {
+          margin: 0px 5px;
+        }
+
+        .cherry-name-tooltip {
+          max-width: 350px;
+        }
+
+        @media only screen and (max-width: 350px) {
+          .cherry-buttons .cherry-button {
+            font-size: 10px;
+          }
+        }
+    </style>
+
+    <!-- TODO - Move these to webpack -->
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <!-- Materialize Compiled and minified CSS/JavaScript -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>Test Page for Cherry's Logo Webcomponent</title>
+</head>
+<body>
+    <div class="cherry-homepage-container">
+        <div class="cherry-buttons">
+            <a id="cherry-btn-about-me" class="cherry-button red darken-3 waves-effect waves-light btn">About Me</a>
+            <a id="cherry-btn-experience" class="cherry-button red darken-3 waves-effect waves-light btn">Experience</a>
+            <a id="cherry-btn-projects" class="cherry-button red darken-3 waves-effect waves-light btn">Projects</a>
+        </div>
+    
+        <div class="cherry-brackets-container">
+            <cherry-brackets id="cherry-example-brackets" currentSlot="0" color="hsl(0, 100%, 30%)">
+                <div slot="slot0" class="cherry-slot-logo">
+                    <cherry-logo></cherry-logo>
+                </div>
+                <div slot="slot1" class="cherry-slot">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title center-align">
+                                <h3>About Me</h3>
+                                <img src="b8ab0208947e9e52de9fab13ccdd9bf4.jpg" class="circle responsive-img cherry-profile-pic"/>
+                            </span>
+                            <p class="center-align flow-text">
+                                Hi! My name is Ryan Poonolly but everybody calls me Cherry.<br/>
+                                <a class="tooltipped" 
+                                    data-position="top" 
+                                    data-tooltip="
+                                      <div class='cherry-name-tooltip'>
+                                        I was born in Kerala, India with the name Cherry. Cherry was a pretty common name in Kerala
+                                        & I was actually named after my grandfather (his name was Cherian).
+                                        <br/><br/>
+                                        Unfortunately when my family moved to the US, my parents quickly realized that they had named their son after a fruit...
+                                        So in an attempt to spare me a life of ridicule, they renamed me to Ryan. ('Ryan' comes from the 'rian' in 'Cherian')
+                                        <br/><br/> 
+                                        Unfortunately I still found plenty of other ways to condemn myself to a life of ridicule
+                                        (by sporting a really embarrassing hairdo for most of high school/college for instance)
+                                        <br/><br/>
+                                        ...So since the name change was pretty ineffective, I resolved to just stick with Cherry.
+                                        <br/><br/>
+                                        The end result? I'm officially Ryan on paper, but everyone just calls me Cherry.. which is good, I prefer Cherry :)
+                                      </div>
+                                    "
+                                >(Why Cherry? It's a long story...)</a>
+                            </p>
+                            <br/>
+                            <p class="center-align flow-text">
+                                I'm a full stack engineer with 5 years of industry experience.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div slot="slot2" class="cherry-slot">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title center-align"><h3>Experience!</h3></span>
+                            <p>
+                                So much experience folks. Tremendous amounts of experience. Greatest experience in the world.
+                                My people tell me. You know what they tell me? I've got great experience.
+                                It's amazing ladies and gentlement. My experience is spectacular.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="cherry-projects" slot="slot3" class="cherry-slot">
+                  <!-- Populated with logic in index.js -->
+                </div>
+            </cherry-brackets>
+        </div>
+    
+        <div class="cherry-swarm-container">
+            <cherry-swarm id="cherry-bg-swarm" particleCount="1000"></cherry-swarm>
+        </div>
+    </div>
+<script type="text/javascript" src="main.js"></script></body>
+</html>
