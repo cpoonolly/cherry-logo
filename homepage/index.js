@@ -101,7 +101,7 @@ $(document).ready(() => {
   $('.tooltipped').tooltip();
 
   spinLogo();
-  setInterval(() => spinLogo(), 4000);
+  setInterval(() => spinLogo());
 
   swarmSetColors();
   $(document).on('click', () => playExitAnimation());

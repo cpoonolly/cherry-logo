@@ -100,9 +100,6 @@ class CherrySwarmCanvas extends LitElement {
     const dt = currentTime - this.lastAnimationFrameTime;
     const canvasContext = canvas.getContext('2d');
 
-    canvasContext.fillStyle = 'white';
-    canvasContext.fillRect(0, 0, this.width, this.height);
-
     this.animator.animate(this.swarm, dt, currentTime);
     this.renderer.render(canvasContext, this.swarm);
 

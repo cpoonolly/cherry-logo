@@ -4,42 +4,55 @@ class SwarmRenderer {
   }
 }
 
-//`hsl(0, 100%, ${getRandomInt(60, 90)}%)`
-
 class SingleColoredSquareRenderer extends SwarmRenderer {
-  constructor({color, size}) {
+  constructor({bgColor, color, size}) {
     super();
 
     this.color = color;
     this.size = size;
+    this.bgColor = bgColor || 'white';
   }
 
   render(canvasContext, swarm) {
-    let size = canvasContext.canvas.width * this.size / 1000;
-    canvasContext.fillStyle = this.color;
+    const canvasWidth = canvasContext.canvas.width;
+    const canvasHeight = canvasContext.canvas.height;
+    const particleSize = canvasWidth * this.size / 1000;
 
+    // clear canvas
+    canvasContext.fillStyle = this.bgColor;
+    canvasContext.fillRect(0, 0, canvasWidth, canvasHeight);
+
+    // render particles
+    canvasContext.fillStyle = this.color;
     swarm.particles.forEach((particle) => {
-        canvasContext.fillRect(particle.x, particle.y, size, size);
+        canvasContext.fillRect(particle.x, particle.y, particleSize, particleSize);
     });
   }
 }
 
 class MultiColoredRectsRenderer extends SwarmRenderer {
-  constructor({colors, size}) {
+  constructor({bgColor, colors, size}) {
     super();
 
     this.colors = colors;
     this.size = size;
+    this.bgColor = bgColor || 'white';
   }
 
   render(canvasContext, swarm) {
-    let size = canvasContext.canvas.width * this.size / 1000;
+    const canvasWidth = canvasContext.canvas.width;
+    const canvasHeight = canvasContext.canvas.height;
+    const particleSize = canvasWidth * this.size / 1000;
 
+    // clear canvas
+    canvasContext.fillStyle = this.bgColor;
+    canvasContext.fillRect(0, 0, canvasWidth, canvasHeight);
+
+    // render particles
     canvasContext.fillStyle = this.color;
-
     swarm.particles.forEach((particle, index) => {
       canvasContext.fillStyle = this.colors[index % this.colors.length];
-      canvasContext.fillRect(particle.x, particle.y, size, size);
+      canvasContext.fillRect(particle.x, particle.y, particleSize, particleSize);
     });
   }
 }
@@ -52,7 +65,7 @@ class CusotmSwarmRenderer extends SwarmRenderer {
   }
 
   render(canvasContext, swarm) {
-    swarm.particles.forEach((particle, index) => this.customRenderCallback(canvasContext, particle, index));
+    this.customRenderCallback(canvasContext, swarm);
   }
 }
 
