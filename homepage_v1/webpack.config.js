@@ -3,7 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const PROD_CONFIG = {
   entry: {
-    index: './index.js'
+    index: './index.js',
+    info: './info.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -15,7 +16,13 @@ const PROD_CONFIG = {
       template: 'index.html',
       chunks: ['index'],
       favicon: './imgs/favicon.ico'}
-    )
+    ),
+    new HtmlWebpackPlugin({
+      filename: 'info.html',
+      template: 'info.html',
+      chunks: ['info'],
+      favicon: './imgs/favicon.ico'
+    })
   ],
   module:{
     rules:[{

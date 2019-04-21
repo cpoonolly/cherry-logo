@@ -7,71 +7,84 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <style>
-    .cherry-homepage-container {
-      position: relative;
-      cursor: pointer;
-    }
-
-    .cherry-brackets-container,
-    .cherry-swarm-container {
-      position: absolute;
-      width: calc(100vw);
-      height: calc(100vh);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .cherry-brackets-container {
-      z-index: 1001;
-    }
-
-    .cherry-swarm-container {
-      z-index: 1000;
-    }
-
-    .cherry-swarm-container cherry-swarm {
-      width: 100%;
-      height: 100%;
-    }
-
-    .cherry-slot {
+    .main-container {
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      min-height: calc(100vh);
+
+      background: radial-gradient(512.00px at 50% 50%, #FFFFFF 0%, #D2D2D2 100%);
+      font-family: 'Karla', sans-serif;
+    }
+
+    .header {
+      width: 100%;
+    }
+
+    .header-nav {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .header-nav-link {
+      color: #D32F2F;
+      font-size: 32px;
+      font-weight: bold;
+      margin: 0px 20px;
+      font-family: Karla;
+      text-decoration: none;
+      text-transform: uppercase;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .content {
+      flex-grow: 1;
+      display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
-      color: hsl(0, 100%, 20%);
     }
 
-    #cherry-logo {
-      max-width: 300px;
+    .splash-content {
+      max-width: 500px;
+      min-width: 300px;
+      width: 100%;
+      margin-top: -200px;
     }
 
-    @keyframes exit-animation {
-      from { padding: calc(0vw); }
-      to { padding: calc(100vw); }
+    .splash-title {
+      margin: 0px;
+      margin-top: -100px;
+      color: #D32F2F;
+      font-size: 50px;
+      font-family: Karla;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
-    #cherry-logo-container {
-      padding: calc(0vw);
-    }
+    @media only screen and (max-width: 600px) {
+      .splash-title {
+        margin-top: -50px;
+      }
 
-    #cherry-logo-container.animate-exit {
-      animation-name: exit-animation;
-      animation-duration: 4s;
-      padding: calc(100vw);
+      .header-nav {
+        display: none;
+      }
     }
   </style>
 
   <!-- TODO - Move these to webpack -->
+  <!-- Normalize.css -->
+  <link href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css" rel="stylesheet">
   <!-- Jquery -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
-  <!-- Materialize Compiled and minified CSS/JavaScript -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+  <!-- Google Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Google Karla Font -->
+  <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
   <!-- Webcomponent Polyfills - load webcomponents bundle, which includes all the necessary polyfills -->
   <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.7/webcomponents-loader.js"></script>
   <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.7/custom-elements-es5-adapter.js"></script>
@@ -80,17 +93,19 @@
 </head>
 
 <body>
-  <div class="cherry-homepage-container">
-    <div class="cherry-brackets-container">
-      <cherry-brackets id="cherry-brackets" currentSlot="0" color="hsl(0, 100%, 30%)">
-        <div slot="slot0" id="cherry-logo-container">
-          <cherry-logo id="cherry-logo"></cherry-logo>
-        </div>
-      </cherry-brackets>
+  <div class="main-container">
+    <div class="header">
+      <nav class="header-nav">
+        <a class="header-nav-link" href="#">About</a>
+        <a class="header-nav-link" href="#">Experience</a>
+        <a class="header-nav-link" href="#">Projects</a>
+      </nav>
     </div>
-
-    <div class="cherry-swarm-container">
-      <cherry-swarm id="cherry-bg-swarm" particleCount="1000"></cherry-swarm>
+    <div class="content">
+      <div class="splash-content">
+        <cherry-logo id="cherry-logo"></cherry-logo>
+        <h1 class="splash-title">Ryan Poonolly</h1>
+      </div>
     </div>
   </div>
 </body>
