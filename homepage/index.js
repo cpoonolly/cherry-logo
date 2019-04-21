@@ -13,7 +13,13 @@ function spinLogo() {
   cherryLogoEl.spin = true;
 }
 
+function toggleSmallNav() {
+  $('.content').toggleClass('small-nav-open');
+}
+
 $(document).ready(() => {
   spinLogo();
-  setInterval(() => spinLogo(), 4000);
+  setInterval(() => spinLogo(), 8000);
+
+  $('.header-nav-small-link').on('click', () => toggleSmallNav())
 });
