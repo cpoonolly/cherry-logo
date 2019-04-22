@@ -14,12 +14,25 @@ function spinLogo() {
 }
 
 function toggleSmallNav() {
-  $('.content').toggleClass('small-nav-open');
+  $('.content').toggleClass('active-content-small-nav');
+}
+
+function handleNav() {
+  let navTo = window.location.hash.substr(1);
+  console.log(navTo);
+
+  $('.content').removeClass('active-content-small-nav');
+  $('.content').removeClass('active-content-splash');
+  $('.content').removeClass('active-content-about');
+  $('.content').removeClass('active-content-experience');
+  $('.content').removeClass('active-content-projects');
+
+  $('.content').addClass(`active-content-${navTo}`);
 }
 
 $(document).ready(() => {
-  spinLogo();
   setInterval(() => spinLogo(), 8000);
 
-  $('.header-nav-small-link').on('click', () => toggleSmallNav())
+  $('.header-small-nav-link').on('click', () => toggleSmallNav())
+  $(window).on('hashchange', () => handleNav());
 });

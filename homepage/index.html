@@ -48,11 +48,16 @@
       align-items: center;
     }
 
-    .splash-content {
+    .content-splash {
+      display: none;
       max-width: 500px;
       min-width: 300px;
       width: 100%;
       margin-top: -200px;
+    }
+
+    .content.active-content-splash .content-splash {
+      display: block;
     }
 
     .splash-title {
@@ -66,20 +71,44 @@
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
-    .header-nav-small {
+    .content-about {
+      display: none;
+    }
+
+    .content.active-content-about .content-about {
+      display: block;
+    }
+
+    .content-experience {
+      display: none;
+    }
+
+    .content.active-content-experience .content-experience {
+      display: block;
+    }
+
+    .content-projects {
+      display: none;
+    }
+
+    .content.active-content-projects .content-projects {
+      display: block;
+    }
+
+    .header-small-nav {
       display: none;
       justify-content: flex-start;
       align-items: center;
       padding: 20px;
     }
 
-    .header-nav-small-link i.material-icons {
+    .header-small-nav-link i.material-icons {
       color: #D32F2F;
       font-size: 40px;
       cursor: pointer;
     }
 
-    .small-nav-content {
+    .content-small-nav {
       display: none;
       flex-direction: column;
       justify-content: space-evenly;
@@ -96,15 +125,18 @@
         display: none;
       }
 
-      .header-nav-small {
+      .header-small-nav {
         display: flex;
       }
 
-      .content.small-nav-open .splash-content {
+      .content.active-content-small-nav > .content-splash,
+      .content.active-content-small-nav > .content-about,
+      .content.active-content-small-nav > .content-experience,
+      .content.active-content-small-nav > .content-projects {
         display: none;
       }
 
-      .content.small-nav-open .small-nav-content {
+      .content.active-content-small-nav > div.content-small-nav {
         display: flex;
       }
     }
@@ -132,25 +164,34 @@
   <div class="main-container">
     <div class="header">
       <nav class="header-nav">
-        <a class="header-nav-link" href="#">About</a>
-        <a class="header-nav-link" href="#">Experience</a>
-        <a class="header-nav-link" href="#">Projects</a>
+        <a class="header-nav-link" href="#about">About</a>
+        <a class="header-nav-link" href="#experience">Experience</a>
+        <a class="header-nav-link" href="#projects">Projects</a>
       </nav>
-      <nav class="header-nav-small">
-        <a class="header-nav-small-link">
+      <nav class="header-small-nav">
+        <a class="header-small-nav-link">
           <i class="material-icons">menu</i>
         </a>
       </nav>
     </div>
-    <div class="content">
-      <div class="splash-content animated flipInY">
+    <div class="content active-content-splash">
+      <div class="content-small-nav animated slideInDown">
+        <a class="header-nav-link" href="#about">About</a>
+        <a class="header-nav-link" href="#experience">Experience</a>
+        <a class="header-nav-link" href="#projects">Projects</a>
+      </div>
+      <div class="content-splash animated flipInY">
         <cherry-logo id="cherry-logo"></cherry-logo>
         <h1 class="splash-title">Ryan Poonolly</h1>
       </div>
-      <div class="small-nav-content animated slideInDown">
-        <a class="header-nav-link" href="#">About</a>
-        <a class="header-nav-link" href="#">Experience</a>
-        <a class="header-nav-link" href="#">Projects</a>
+      <div class="content-about">
+        <h1>About Me</h1>
+      </div>
+      <div class="content-experience">
+        <h1>Experience</h1>
+      </div>
+      <div class="content-projects">
+        <h1>Projects</h1>
       </div>
     </div>
   </div>
