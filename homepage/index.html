@@ -91,6 +91,7 @@
       align-items: center;
       flex-grow: 1;
       width: 100%;
+      padding-top: 10%;
     }
 
     .content.active-content-about .content-about {
@@ -98,14 +99,13 @@
     }
 
     .about-profile-pic {
-      margin-top: 10%;
       width: 250px;
       height: 250px;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       border-radius: 150px;
     }
 
-    .about-me-text {
+    .about-description {
       margin-top: 50px;
       color: #D32F2F;
       font-size: 24px;
@@ -118,10 +118,97 @@
 
     .content-experience {
       display: none;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: baseline;
+      flex-grow: 1;
+      max-width: 800px;
     }
 
     .content.active-content-experience .content-experience {
-      display: block;
+      display: flex;
+    }
+
+    .experience-title {
+      font-size: 40px;
+      font-family: 'Roboto Condensed', sans-serif;
+      text-align: center;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .experience-logo {
+      width: 150px;
+      height: 150px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .experience-sub-title {
+      font-size: 28px;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: normal;
+      text-align: center;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      margin: 40px 0;
+    }
+
+    .experience-description {
+      color: #D32F2F;
+      font-size: 24px;
+      font-family: 'Roboto Condensed', sans-serif;
+      text-align: center;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      margin: 50px 10px;
+      max-width: 800px;
+    }
+
+    .experience-summary {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 300px;
+      cursor: pointer;
+      padding-top: 10%;
+    }
+
+    .experience-summary.hidden {
+      display: none;
+    }
+
+    .experience-summary:hover .experience-title {
+      text-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .experience-summary:hover .experience-logo {
+      box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .experience-summary:hover .experience-sub-title {
+      text-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .experience-detailed {
+      display: none;
+    }
+
+    .experience-detailed.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 5%;
+    }
+
+    .experience-detailed-exit {
+      width: 100%;
+      text-align: right;
+      padding-right: 50px;
+    }
+
+    .experience-detailed-exit i.material-icons {
+      font-size: 32px;
+      cursor: pointer;
     }
 
     /* Projects Page */
@@ -134,27 +221,19 @@
       display: block;
     }
 
-    /* Small Nav */
+    /* Scroll Animations */
+    *[data-scroll-animation]:not(.animated) {
+      visibility: hidden;
+    }
+
+    /* Small Screen Nav */
 
     .header-small-nav {
       display: none;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .header-small-nav-link i.material-icons {
-      color: #D32F2F;
-      font-size: 40px;
-      cursor: pointer;
     }
 
     .content-small-nav {
       display: none;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-      flex-grow: 1;
     }
 
     @media only screen and (max-width: 600px) {
@@ -168,17 +247,27 @@
 
       .header-small-nav {
         display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px;
       }
 
-      .content.active-content-small-nav > .content-splash,
-      .content.active-content-small-nav > .content-about,
-      .content.active-content-small-nav > .content-experience,
-      .content.active-content-small-nav > .content-projects {
+      .header-small-nav-link i.material-icons {
+        color: #D32F2F;
+        font-size: 40px;
+        cursor: pointer;
+      }
+
+      .content.active-content-small-nav > *:not(.content-small-nav) {
         display: none;
       }
 
       .content.active-content-small-nav > .content-small-nav {
         display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-grow: 1;
       }
     }
   </style>
@@ -227,7 +316,7 @@
       </div>
       <div class="content-about">
         <img class="about-profile-pic animated slideInDown" alt="Cherry Poonolly Profile Pic" src="imgs/cherryProfilePic.jpg">
-        <p class="about-me-text animated slideInUp">
+        <p class="about-description animated slideInUp">
           Hi my name is Ryan Poonolly. I’m a full stack engineer with over 5 years of industry experience.
           <br/><br/>
           I was previously a Technical Lead at Honest Buildings (a real estate tech startup) &amp; a Tech Analyst at Goldman Sachs.
@@ -238,8 +327,166 @@
         </p>
       </div>
       <div class="content-experience">
-        <h2>Honest Buildings</h2> 
-        <img class="" alt="Honest Buildings Logo" src="imgs/honestbuildings.jpeg">
+        <!-- Experience Summary -->
+        <div class="experience-summary" onclick="showDetailedExperience('experience-hb')" data-scroll-animation="slideInLeft">
+          <h2 class="experience-title">Honest Buildings</h2> 
+          <img class="experience-logo" alt="Honest Buildings Logo" src="imgs/honestbuildings.jpeg">
+          <h4 class="experience-sub-title">Senior Software Engineer &amp; Technical Lead</h4>
+        </div>
+        <div class="experience-summary" onclick="showDetailedExperience('experience-gs')" data-scroll-animation="slideInRight">
+          <h2 class="experience-title">Goldman Sachs</h2> 
+          <img class="experience-logo" alt="Goldman Sachs Logo" src="imgs/goldmansachs.png">
+          <h4 class="experience-sub-title">Technical Analyst</h4>
+        </div>
+        <div class="experience-summary" onclick="showDetailedExperience('experience-gs-intern')" data-scroll-animation="slideInLeft">
+          <h2 class="experience-title">Goldman Sachs</h2> 
+          <img class="experience-logo" alt="Goldman Sachs Logo" src="imgs/goldmansachs.png">
+          <h4 class="experience-sub-title">Summer Analyst</h4>
+        </div>
+        <div class="experience-summary" onclick="showDetailedExperience('experience-guardian')" data-scroll-animation="slideInRight">
+          <h2 class="experience-title">Guardian Life</h2> 
+          <img class="experience-logo" alt="Guardian Life Logo" src="imgs/guardianlife.jpeg">
+          <h4 class="experience-sub-title">Applications Intern</h4>
+        </div>
+        <div class="experience-summary" onclick="showDetailedExperience('experience-apg')" data-scroll-animation="slideInLeft">
+          <h2 class="experience-title">APG</h2> 
+          <img class="experience-logo" alt="APG Logo" src="imgs/apg.png">
+          <h4 class="experience-sub-title">Operations Intern</h4>
+        </div>
+        <div class="experience-summary" onclick="showDetailedExperience('experience-greenlion')" data-scroll-animation="slideInRight">
+          <h2 class="experience-title">The Green Lion</h2> 
+          <img class="experience-logo" alt="The Green Lion Logo" src="imgs/thegreenlion.png">
+          <h4 class="experience-sub-title">Volunteer</h4>
+        </div>
+        <div class="experience-summary" onclick="showDetailedExperience('experience-ubeci')" data-scroll-animation="slideInLeft">
+          <h2 class="experience-title">UBECI</h2> 
+          <img class="experience-logo" alt="UBECI Logo" src="imgs/ubeci.png">
+          <h4 class="experience-sub-title">Volunteer</h4>
+        </div>
+
+        <!-- Experience Details -->
+        <div id="experience-hb" class="experience-detailed">
+          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+            <i class="material-icons">close</i>
+          </span>
+          <h2 class="experience-title">Honest Buildings</h2> 
+          <img class="experience-logo" alt="Honest Buildings Logo" src="imgs/honestbuildings.jpeg">
+          <p class="experience-description animated slideInUp">
+            Honest Buildings is a asset management platform used by some of the largest real estate owners in the industry. 
+            Our clients included companies such Brookfield, WeWork, SL Green Realty, Beacon Capital Partners, etc.
+            <br/><br/>
+            I initially joined HB in early 2015. During this time I mostly worked as an individual contributor delivering several 
+            high impact projects such as our primary user dashboard, our permissions sytem, invoicing, cost tracking, vendor managment, etc.
+            <br/><br/>
+            Over the next 3 years the company would grow from ~15 to over 100 people.
+            Being apart of HB during this period of growth was an incredibly valuable experience. 
+            I learned a lot about how to scale both a business &amp; a team up.
+            <br/><br/>
+            As the team grew, I was given the opportunity to lead a squad composed of 
+            1 product manager, 1 designer, 2 on-site engineers, &amp; 3 remote contractors.
+            As the Technical Lead for my squad my responsibilities included planning sprints/quarterly roadmaps, 
+            negotiating deadlines with our clients, thinking through the architectural complexitities of our work,
+            and breaking down large projects into clear easily digestable tasks for our engineers.
+            <br/><br/>
+            While I was incredibly proud of everything me &amp; my team had accomplished during my time at HB, 
+            it had always been a lifelong ambition of mine to travel. Because the company was in a relatively stable
+            place, I decided it was the best time to leave.
+            <br/><br/>
+            I spent my last few months at HB worked closely with my managers &amp; with senior leadership to 
+            slowly transition myself off my team and train a replacement.
+          </p>
+        </div>
+        <div id="experience-gs" class="experience-detailed">
+          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+            <i class="material-icons">close</i>
+          </span>
+          <h2 class="experience-title">Goldman Sachs</h2> 
+          <img class="experience-logo" alt="Goldman Sachs Logo" src="imgs/goldmansachs.png">
+          <p class="experience-description animated slideInUp">
+            I joined Goldman Sachs after graduating college. I had previously worked there as an intern &amp; was given a return offer at the end of the summer.
+            <br/><br/>
+            At GS my team's role was to calculate firmwide exposure to counterparty default (i.e. counterparty risk).
+            <br/><br/>
+            Basically this meant we were answering the question: "if 'CompanyX' goes bankrupt how much money could the firm as a whole lose?".
+            <br/><br/>
+            Different GS trading desks would then be charged a fee based on how much counterparty risk they carry
+            &amp; the money from this fee would be used to hedge their positions.
+            <br/><br/>
+            My role at GS was to support the processes that ran these calculations &amp; support the traders hedging against this form of risk.
+          </p>
+        </div>
+        <div id="experience-gs-intern" class="experience-detailed">
+          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+            <i class="material-icons">close</i>
+          </span>
+          <h2 class="experience-title">Goldman Sachs</h2> 
+          <img class="experience-logo" alt="Goldman Sachs Logo" src="imgs/goldmansachs.png">
+          <p class="experience-description animated slideInUp">
+            I was an intern at Goldman Sachs during the summer of 2012. 
+            <br/><br/>
+            My internship project involved building a platform for digitizing the terms of differnt legal aggreements & ensuring that differnt
+            departments in GS have common interpretations of these legal terms.
+            <br/><br/>
+            During my time here I was mostly working with a GS proprietary technology called "SecDb". SecDb was a globally distributed graph database
+            used throughout the firm. The language used to interact with SecDb was called "Slang" &amp; this what most of my development was done in.
+            <br/><br/>
+            At the end of my summer internship I was given an offer to return as a full time employee.
+          </p>
+        </div>
+        <div id="experience-guardian" class="experience-detailed">
+          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+            <i class="material-icons">close</i>
+          </span>
+          <h2 class="experience-title">Guardian Life</h2> 
+          <img class="experience-logo" alt="Guardian Life Logo" src="imgs/guardianlife.jpeg">
+          <p class="experience-description animated slideInUp">
+            I was an intern at Guardian Life Insurance during the summer of 2011.
+            <br/><br/>
+            During this time I built features for a web application used by Guardian agents to manage insurance policies.
+            <br/><br/>
+            Using Spring, IBM DB2, & jQuery I built components for managing alerts, reminders, and comments.
+          </p>
+        </div>
+        <div id="experience-apg" class="experience-detailed">
+          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+            <i class="material-icons">close</i>
+          </span>
+          <h2 class="experience-title">APG</h2> 
+          <img class="experience-logo" alt="APG Logo" src="imgs/apg.png">
+          <p class="experience-description animated slideInUp">
+            I was an intern at APG Asset Managment during the summer of 2010.
+            <br/><br/>
+            My project at APG involved understanding legacy SAP processes and documenting them for auditors & trainees.
+          </p>
+        </div>
+        <div id="experience-greenlion" class="experience-detailed">
+          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+            <i class="material-icons">close</i>
+          </span>
+          <h2 class="experience-title">The Green Lion</h2> 
+          <img class="experience-logo" alt="The Green Lion Logo" src="imgs/thegreenlion.png">
+          <p class="experience-description animated slideInUp">
+            The Green Lion is a NGO based all over Southeast Asia. I was a volunteer at their office in Ho Chi Minh, Vietnam from February to March of 2019.
+            <br/><br/>
+            During my time as a volunteer I taught English at a local university, worked at a soup kitchen, & delivered food to a hospital.
+          </p>
+        </div>
+        <div id="experience-ubeci" class="experience-detailed">
+          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+            <i class="material-icons">close</i>
+          </span>
+          <h2 class="experience-title">UBECI</h2> 
+          <img class="experience-logo" alt="UBECI Logo" src="imgs/ubeci.png">
+          <p class="experience-description animated slideInUp">
+            UBECI (United to Benefit Ecuadorian Children International) is a NGO based in Ecuador. UBECI's mission is to improve the lives of
+            impoverished children living &amp; working in street markets by providing free educational, medical, and dental services.
+            <br/><br/>
+            I was a volunteer at UBECI from November to December of 2018. During my time at UBECI I was mostly working at the NGO offices
+            helping them to build a website & also running marketing campaigns for a Christmas fundraisor.
+            <br/><br/>
+            I also had the opportunity to visit a small make-shift day care class they were running for a day to see the street markets first hand.
+          </p>
+        </div>
       </div>
       <div class="content-projects">
         <h1>Projects</h1>

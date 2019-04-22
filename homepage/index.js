@@ -1,12 +1,5 @@
 import '../index';
 
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 function spinLogo() {
   let cherryLogoEl = document.getElementById('cherry-logo');
 
@@ -19,7 +12,6 @@ function toggleSmallNav() {
 
 function handleNav() {
   let navTo = (window.location.hash || '#splash').substr(1);
-  console.log(navTo);
 
   $('.content').removeClass('active-content-small-nav');
   $('.content').removeClass('active-content-splash');
@@ -33,9 +25,42 @@ function handleNav() {
   $(`.header-nav-link[href="#${navTo}"`).addClass('active');
 }
 
+window.showDetailedExperience = function(id) {
+  hideDetailedExperience();
+
+  $('.experience-summary').addClass('hidden');
+  $(`#${id}.experience-detailed`).addClass('active');
+}
+
+window.hideDetailedExperience = function() {
+  $('.experience-summary').removeClass('hidden');
+  $('.experience-detailed').removeClass('active');
+}
+
+function updateScrollAnimations() {
+  $('*[data-scroll-animation]:not(.animated)').each((index, el) => {
+    let jqueryEl = $(el);
+
+    if (jqueryEl.offset().top < $(window).scrollTop() + $(window).height()) {
+      console.log('animating element');
+      jqueryEl.addClass('animated');
+      jqueryEl.addClass(jqueryEl.attr('data-scroll-animation'));
+    }
+  });
+}
+
 $(document).ready(() => {
+  // Setup navigation (display different "content" depending on the url)
   handleNav();
-  setInterval(() => spinLogo(), 8000);
-  $('.header-small-nav-link').on('click', () => toggleSmallNav())
   $(window).on('hashchange', () => handleNav());
+  
+  // Setup Spinning Logo
+  setInterval(() => spinLogo(), 8000);
+
+  // Setup Small Screen Navigation (the hamburger menu)
+  $('.header-small-nav-link').on('click', () => toggleSmallNav());
+
+  // Setup Scroll Animations
+  updateScrollAnimations();
+  $(document).scroll(() => updateScrollAnimations());
 });
