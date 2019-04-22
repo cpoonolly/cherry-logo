@@ -18,7 +18,7 @@ function toggleSmallNav() {
 }
 
 function handleNav() {
-  let navTo = window.location.hash.substr(1);
+  let navTo = (window.location.hash || '#splash').substr(1);
   console.log(navTo);
 
   $('.content').removeClass('active-content-small-nav');
@@ -28,11 +28,14 @@ function handleNav() {
   $('.content').removeClass('active-content-projects');
 
   $('.content').addClass(`active-content-${navTo}`);
+
+  $('.header-nav-link').removeClass('active');
+  $(`.header-nav-link[href="#${navTo}"`).addClass('active');
 }
 
 $(document).ready(() => {
+  handleNav();
   setInterval(() => spinLogo(), 8000);
-
   $('.header-small-nav-link').on('click', () => toggleSmallNav())
   $(window).on('hashchange', () => handleNav());
 });

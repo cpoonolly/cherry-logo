@@ -18,6 +18,8 @@
       font-family: 'Roboto Condensed', sans-serif;
     }
 
+    /* Header */
+
     .header {
       width: 100%;
     }
@@ -38,6 +40,13 @@
       text-decoration: none;
       text-transform: uppercase;
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-color: transparent;
+      border-style: solid;
+      border-width: 0 0 5px 0; 
+    }
+
+    .header-nav-link.active {
+      border-color: #D32F2F;
     }
 
     .content {
@@ -47,6 +56,8 @@
       justify-content: center;
       align-items: center;
     }
+
+    /* Splash Page */
 
     .content-splash {
       display: none;
@@ -71,13 +82,39 @@
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
+    /* About Page */
+
     .content-about {
       display: none;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      flex-grow: 1;
+      width: 100%;
     }
 
     .content.active-content-about .content-about {
-      display: block;
+      display: flex;
     }
+
+    .about-profile-pic {
+      margin-top: 10%;
+      width: 250px;
+      height: 250px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 150px;
+    }
+
+    .about-me-text {
+      margin-top: 50px;
+      color: #D32F2F;
+      font-size: 24px;
+      font-family: 'Roboto Condensed', sans-serif;
+      text-align: center;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Experience Page */
 
     .content-experience {
       display: none;
@@ -87,6 +124,8 @@
       display: block;
     }
 
+    /* Projects Page */
+
     .content-projects {
       display: none;
     }
@@ -94,6 +133,8 @@
     .content.active-content-projects .content-projects {
       display: block;
     }
+
+    /* Small Nav */
 
     .header-small-nav {
       display: none;
@@ -136,7 +177,7 @@
         display: none;
       }
 
-      .content.active-content-small-nav > div.content-small-nav {
+      .content.active-content-small-nav > .content-small-nav {
         display: flex;
       }
     }
@@ -185,10 +226,20 @@
         <h1 class="splash-title">Ryan Poonolly</h1>
       </div>
       <div class="content-about">
-        <h1>About Me</h1>
+        <img class="about-profile-pic animated slideInDown" alt="Cherry Poonolly Profile Pic" src="imgs/cherryProfilePic.jpg">
+        <p class="about-me-text animated slideInUp">
+          Hi my name is Ryan Poonolly. I’m a full stack engineer with over 5 years of industry experience.
+          <br/><br/>
+          I was previously a Technical Lead at Honest Buildings (a real estate tech startup) &amp; a Tech Analyst at Goldman Sachs.
+          <br/><br/>
+          For the last 6 months I’ve been fulfilling a lifelong dream of volunteering &amp; travelling around the world.
+          <br/><br/>
+          Thus far I’ve been to South America, Europe, &amp; Southeast Asia
+        </p>
       </div>
       <div class="content-experience">
-        <h1>Experience</h1>
+        <h2>Honest Buildings</h2> 
+        <img class="" alt="Honest Buildings Logo" src="imgs/honestbuildings.jpeg">
       </div>
       <div class="content-projects">
         <h1>Projects</h1>
