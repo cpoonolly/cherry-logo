@@ -1,4 +1,4 @@
-import '../index';
+import '../cherry-logo';
 
 function spinLogo() {
   let cherryLogoEl = document.getElementById('cherry-logo');
