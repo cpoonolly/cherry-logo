@@ -215,10 +215,57 @@
 
     .content-projects {
       display: none;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: baseline;
+      flex-grow: 1;
+      max-width: 800px;
+      padding-bottom: 50px;
     }
 
     .content.active-content-projects .content-projects {
-      display: block;
+      display: flex;
+    }
+
+    .projects-title {
+      font-size: 32px;
+      font-family: 'Roboto Condensed', sans-serif;
+      text-align: center;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .projects-logo {
+      width: 200px;
+      height: 200px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      margin-bottom: 25px;
+    }
+
+    .projects-description {
+      font-size: 18px;
+      font-family: 'Roboto Condensed', sans-serif;
+      text-align: center;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      margin: 25px 10px;
+      max-width: 800px;
+    }
+    
+    .projects-link {
+      color: #D32F2F;
+      margin: 25px 20px;
+      font-size: 18px;
+    }
+
+    .projects-summary {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 300px;
+      padding-top: 10%;
     }
 
     /* Scroll Animations */
@@ -490,7 +537,63 @@
         </div>
       </div>
       <div class="content-projects">
-        <h1>Projects</h1>
+        <div class="projects-summary" data-scroll-animation="slideInLeft">
+          <h2 class="projects-title">Pigeon RTC</h2> 
+          <img class="projects-logo" alt="Pigeon RTC Logo" src="imgs/pigeon.svg">
+          <p class="projects-description">
+            A whimsical pigeon based video chat application. Created as an April Fools day joke :)
+            <br/><br/>
+            Build with:<br/>WebRTC, React, & Material-UI
+          </p>
+          <span class="projects-links">
+            <a class="projects-link" href="https://cpoonolly.github.io/pigeon-rtc">Website</a>
+            <a class="projects-link" href="https://github.com/cpoonolly/pigeon-rtc">Github</a>
+          </span>
+        </div>
+        <div class="projects-summary" data-scroll-animation="slideInRight">
+          <h2 class="projects-title">Pokerchip Counter</h2> 
+          <img class="projects-logo" alt="Pokerchip Counter Logo" src="imgs/pokerchip.png">
+          <p class="projects-description">
+            A Android app for tracking pokerchips in a poker game
+            <br/><br/><br/>
+            Build with:<br/>React Native
+          </p>
+          <span class="projects-links">
+            <a class="projects-link" href="https://expo.io/@cpoonolly/PokerChipCounter">Expo</a>
+            <a class="projects-link" href="https://cpoonolly.github.io/pokerchipcounter">Github</a>
+          </span>
+        </div>
+        <div class="projects-summary" data-scroll-animation="slideInLeft">
+          <h2 class="projects-title">NYC DOB ETL</h2> 
+          <img class="projects-logo" alt="NYC DOB ETL Logo" src="imgs/nycdob.png">
+          <p class="projects-description">
+            A ETL pipeline for scraping permits from the NYC department of buildings website.
+            <br/><br/>
+            Build with:<br/>AWS Lambda, Java, Jsoup, & Redshift
+          </p>
+          <span class="projects-links">
+            <a class="projects-link" href="https://github.com/cpoonolly/nyc_dob_etl">Github</a>
+          </span>
+        </div>
+        <div class="projects-summary" data-scroll-animation="slideInRight">
+          <h2 class="projects-title">Task Graph</h2> 
+          <img class="projects-logo" alt="Task Graph Logo" src="imgs/taskgraph.svg">
+          <p class="projects-description">
+            A simple app for creating & organizing tasks & subtasks.
+            <br/><br/><br/>
+            Build with:<br/>Angular2 & Angular Material
+          </p>
+          <span class="projects-links">
+            <a class="projects-link" href="https://cpoonolly.github.io/task-graph">Website</a>
+            <a class="projects-link" href="https://github.com/cpoonolly/task-graph">Github</a>
+          </span>
+        </div>
+        <div class="projects-summary" data-scroll-animation="slideInUp">
+          <img class="projects-logo" alt="Github Logo" src="imgs/github.png">
+          <span class="projects-links">
+            <a class="projects-link" href="https://github.com/cpoonolly/">See more on Github!</a>
+          </span>
+        </div>
       </div>
     </div>
   </div>
