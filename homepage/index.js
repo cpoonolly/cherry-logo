@@ -25,14 +25,14 @@ function handleNav() {
   $(`.header-nav-link[href="#${navTo}"`).addClass('active');
 }
 
-window.showDetailedExperience = function(id) {
+function showDetailedExperience(id) {
   hideDetailedExperience();
 
   $('.experience-summary').addClass('hidden');
   $(`#${id}.experience-detailed`).addClass('active');
 }
 
-window.hideDetailedExperience = function() {
+function hideDetailedExperience() {
   $('.experience-summary').removeClass('hidden');
   $('.experience-detailed').removeClass('active');
 }
@@ -42,7 +42,6 @@ function updateScrollAnimations() {
     let jqueryEl = $(el);
 
     if (jqueryEl.offset().top < $(window).scrollTop() + $(window).height()) {
-      console.log('animating element');
       jqueryEl.addClass('animated');
       jqueryEl.addClass(jqueryEl.attr('data-scroll-animation'));
     }
@@ -63,4 +62,14 @@ $(document).ready(() => {
   // Setup Scroll Animations
   updateScrollAnimations();
   $(document).scroll(() => updateScrollAnimations());
+
+  // Setup Experience Transitions
+  $('.experience-detailed-exit').on('tap click', () => hideDetailedExperience());
+  $('#experience-summary-hb').on('tap click', () => showDetailedExperience('experience-hb'));
+  $('#experience-summary-gs').on('tap click', () => showDetailedExperience('experience-gs'));
+  $('#experience-summary-gs-intern').on('tap click', () => showDetailedExperience('experience-gs-intern'));
+  $('#experience-summary-guardian').on('tap click', () => showDetailedExperience('experience-guardian'));
+  $('#experience-summary-apg').on('tap click', () => showDetailedExperience('experience-apg'));
+  $('#experience-summary-greenlion').on('tap click', () => showDetailedExperience('experience-greenlion'));
+  $('#experience-summary-ubeci').on('tap click', () => showDetailedExperience('experience-ubeci'));
 });

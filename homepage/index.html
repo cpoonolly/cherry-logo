@@ -170,7 +170,7 @@
       align-items: center;
       width: 300px;
       cursor: pointer;
-      margin: 10% 0;
+      padding: 40px 0;
     }
 
     .experience-summary.hidden {
@@ -317,6 +317,11 @@
         align-items: center;
         flex-grow: 1;
       }
+
+      /* Weird issue in mobile where clicks for different summaries are overlapping... */
+      .experience-summary {
+        padding: 50px 0 50px 0;
+      }
     }
   </style>
 
@@ -376,37 +381,37 @@
       </div>
       <div class="content-experience">
         <!-- Experience Summary -->
-        <div class="experience-summary" onclick="showDetailedExperience('experience-hb')" data-scroll-animation="slideInLeft">
+        <div id="experience-summary-hb" class="experience-summary" data-scroll-animation="slideInLeft">
           <h2 class="experience-title">Honest Buildings</h2> 
           <img class="experience-logo" alt="Honest Buildings Logo" src="imgs/honestbuildings.jpeg">
           <h4 class="experience-sub-title">Senior Software Engineer &amp; Technical Lead</h4>
         </div>
-        <div class="experience-summary" onclick="showDetailedExperience('experience-gs')" data-scroll-animation="slideInRight">
+        <div id="experience-summary-gs" class="experience-summary" data-scroll-animation="slideInRight">
           <h2 class="experience-title">Goldman Sachs</h2> 
           <img class="experience-logo" alt="Goldman Sachs Logo" src="imgs/goldmansachs.png">
           <h4 class="experience-sub-title">Technical Analyst</h4>
         </div>
-        <div class="experience-summary" onclick="showDetailedExperience('experience-gs-intern')" data-scroll-animation="slideInLeft">
+        <div id="experience-summary-gs-intern" class="experience-summary" data-scroll-animation="slideInLeft">
           <h2 class="experience-title">Goldman Sachs</h2> 
           <img class="experience-logo" alt="Goldman Sachs Logo" src="imgs/goldmansachs.png">
           <h4 class="experience-sub-title">Summer Analyst</h4>
         </div>
-        <div class="experience-summary" onclick="showDetailedExperience('experience-guardian')" data-scroll-animation="slideInRight">
+        <div id="experience-summary-guardian" class="experience-summary" data-scroll-animation="slideInRight">
           <h2 class="experience-title">Guardian Life</h2> 
           <img class="experience-logo" alt="Guardian Life Logo" src="imgs/guardianlife.jpeg">
           <h4 class="experience-sub-title">Applications Intern</h4>
         </div>
-        <div class="experience-summary" onclick="showDetailedExperience('experience-apg')" data-scroll-animation="slideInLeft">
+        <div id="experience-summary-apg" class="experience-summary" data-scroll-animation="slideInLeft">
           <h2 class="experience-title">APG</h2> 
           <img class="experience-logo" alt="APG Logo" src="imgs/apg.png">
           <h4 class="experience-sub-title">Operations Intern</h4>
         </div>
-        <div class="experience-summary" onclick="showDetailedExperience('experience-greenlion')" data-scroll-animation="slideInRight">
+        <div id="experience-summary-greenlion" class="experience-summary" data-scroll-animation="slideInRight">
           <h2 class="experience-title">The Green Lion</h2> 
           <img class="experience-logo" alt="The Green Lion Logo" src="imgs/thegreenlion.png">
           <h4 class="experience-sub-title">Volunteer</h4>
         </div>
-        <div class="experience-summary" onclick="showDetailedExperience('experience-ubeci')" data-scroll-animation="slideInLeft">
+        <div id="experience-summary-ubeci" class="experience-summary" data-scroll-animation="slideInLeft">
           <h2 class="experience-title">UBECI</h2> 
           <img class="experience-logo" alt="UBECI Logo" src="imgs/ubeci.png">
           <h4 class="experience-sub-title">Volunteer</h4>
@@ -414,7 +419,7 @@
 
         <!-- Experience Details -->
         <div id="experience-hb" class="experience-detailed">
-          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+          <span class="experience-detailed-exit">
             <i class="material-icons">close</i>
           </span>
           <h2 class="experience-title">Honest Buildings</h2> 
@@ -446,7 +451,7 @@
           </p>
         </div>
         <div id="experience-gs" class="experience-detailed">
-          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+          <span class="experience-detailed-exit">
             <i class="material-icons">close</i>
           </span>
           <h2 class="experience-title">Goldman Sachs</h2> 
@@ -465,7 +470,7 @@
           </p>
         </div>
         <div id="experience-gs-intern" class="experience-detailed">
-          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+          <span class="experience-detailed-exit">
             <i class="material-icons">close</i>
           </span>
           <h2 class="experience-title">Goldman Sachs</h2> 
@@ -483,7 +488,7 @@
           </p>
         </div>
         <div id="experience-guardian" class="experience-detailed">
-          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+          <span class="experience-detailed-exit">
             <i class="material-icons">close</i>
           </span>
           <h2 class="experience-title">Guardian Life</h2> 
@@ -497,7 +502,7 @@
           </p>
         </div>
         <div id="experience-apg" class="experience-detailed">
-          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+          <span class="experience-detailed-exit">
             <i class="material-icons">close</i>
           </span>
           <h2 class="experience-title">APG</h2> 
@@ -509,7 +514,7 @@
           </p>
         </div>
         <div id="experience-greenlion" class="experience-detailed">
-          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+          <span class="experience-detailed-exit">
             <i class="material-icons">close</i>
           </span>
           <h2 class="experience-title">The Green Lion</h2> 
@@ -521,7 +526,7 @@
           </p>
         </div>
         <div id="experience-ubeci" class="experience-detailed">
-          <span class="experience-detailed-exit" onclick="hideDetailedExperience()">
+          <span class="experience-detailed-exit">
             <i class="material-icons">close</i>
           </span>
           <h2 class="experience-title">UBECI</h2> 
